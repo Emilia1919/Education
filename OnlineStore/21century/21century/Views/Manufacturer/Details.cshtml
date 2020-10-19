@@ -1,0 +1,9 @@
+﻿@model _21century.Models.Manufacturer
+
+@{
+    ViewBag.Title = string.Format("{0} | Производители | {1}", Model.Name, _21century.Constants.TITLE);
+}
+
+<p>@Html.ActionLink("Редактировать", "Edit", new { id = Model.ID })&nbsp;&nbsp;&nbsp;@Html.ActionLink("Удалить", "Delete", new { id = Model.ID })</p>
+<h2>@Model.Name</h2>
+<p>@Model.Description</p>
