@@ -11,7 +11,6 @@ namespace _21century.Controllers
     {
         OnlineStoreEntities entities = new OnlineStoreEntities();
 
-        // Отображает список всех объектов
         public ActionResult Index()
         {
             var objs = entities.Manufacturers;
@@ -73,7 +72,6 @@ namespace _21century.Controllers
             else return View(obj);
         }
 
-        // Открывает форму для удаления объекта, имеющего ID, задаваемый в параметре id
         public ActionResult Delete(int id)
         {
             Manufacturer obj = (from item in entities.Manufacturers where item.ID == id select item).FirstOrDefault();
@@ -81,8 +79,6 @@ namespace _21century.Controllers
             return View(obj);
         }
 
-        // Обрабатывает данные, полученные из формы удаления объекта
-        // Запускается только при получении данных по http Post
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
