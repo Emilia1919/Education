@@ -4,14 +4,16 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using _21century.Models.Metadata;
+using _21century.Models.Interface;
 
 namespace _21century.Models
 {
-    public class Manufacturer1
+    [MetadataType(typeof(ManufacturerMetadata))]
+    public partial class Manufacturer : IBase
     {
-        [MetadataType(typeof(ManufacturerMetadata))]
-        public partial class Manufacturer
+        public bool CanBeDeleted()
         {
+            return true;
         }
     }
 }
