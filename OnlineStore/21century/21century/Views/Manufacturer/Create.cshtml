@@ -4,22 +4,31 @@
     ViewBag.Title = string.Format("Создание производителя | {0}", _21century.Constants.TITLE);
 }
 
+<script scr="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script scr="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
 <p>@Html.ActionLink("Отмена", "Index")</p>
 <h2>Создание производителя</h2>
 
 @using (Html.BeginForm())
 {
+    /*@Html.ValidationSummary()
+
     @Html.LabelFor(model => model.Name)
     <br />
     @Html.EditorFor(model => model.Name)
+    <span style="color:red">@Html.ValidationMessageFor(model => model.Name)</span>
     <br />
     <br />
 
     @Html.LabelFor(model => model.Description)
     <br />
     @Html.TextAreaFor(model => model.Description, new { cols = 70, rows = 5 })
+    <span style="color:red">@Html.ValidationMessageFor(model => model.Description)</span>
     <br />
-    <br />
+    <br />*/
+
+    @Html.EditorForModel()
 
     <input type="submit" value="Создать" />
 }
