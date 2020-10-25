@@ -5,12 +5,13 @@ using System.Web;
 using _21century.Service.Interface;
 using _21century.Models.Interface;
 using System.Data.Entity.Core.Objects;
+using System.Data.Entity;
 
 namespace _21century.Service.Abstract
 {
     public abstract class BaseEntityService<T> : IBaseService<T> where T : class,IBase,new()
     {
-        protected abstract ObjectSet<T> EntitySet { get; }
+        protected abstract DbSet<T> EntitySet { get; }
 
         public virtual IQueryable<T> Get()
         {
@@ -29,17 +30,14 @@ namespace _21century.Service.Abstract
 
         public virtual void Add(T dataObject)
         {
-            EntitySet.AddObject(dataObject);
+            EntitySet.Add(dataObject);
         }
 
         public virtual void Delete(T dataObject)
         {
-            EntitySet.DeleteObject(dataObject);
+            EntitySet.Remove(dataObject);
         }
 
-        public void Save()
-        {
-            EntitySet.Context.SaveChanges();
-        }
+        public abstract void Save();
     }
 }

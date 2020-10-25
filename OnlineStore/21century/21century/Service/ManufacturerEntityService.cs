@@ -11,6 +11,11 @@ namespace _21century.Service
     public class ManufacturerEntityService : BaseEntityService<Manufacturer>
     {
         OnlineStoreEntities entities = new OnlineStoreEntities();
-        protected override System.Data.Objects.ObjectSet<Manufacturer> EntitySet { get { return entities.Manufacturers; } }
+        protected override System.Data.Entity.DbSet<Manufacturer> EntitySet { get { return entities.Manufacturers; } }
+
+        public override void Save()
+        {
+            entities.SaveChanges();
+        }
     }
 }
