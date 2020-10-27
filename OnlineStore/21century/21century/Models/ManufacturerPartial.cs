@@ -10,8 +10,9 @@ using _21century.Models.Interface;
 namespace _21century.Models
 {
     [MetadataType(typeof(ManufacturerMetadata))]
-    public partial class Manufacturer : IOrdered
+    public partial class Manufacturer : IUrlFriendly
     {
+        public string ShortName { get; set; }
         public int? Sequence { get; set; }
 
         public bool CanBeDeleted()

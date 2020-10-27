@@ -4,6 +4,11 @@
     ViewBag.Title = string.Format("Производители | {0}", _21century.Constants.TITLE);
 }
 
+<p>
+    @Html.ActionLink("На главную","Index","Home")
+    @_21century.Constants.BREADCRUMBS_SEPARATOR
+    Производители
+</p>
 <h2>Производители</h2>
 
 <p>@Html.ActionLink("Создать", "Create")</p>
@@ -12,7 +17,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.ActionLink(item.Name, "Details", new { id = item.ID })</td>
+            <td>@Html.ActionLink(item.Name, "GetShortName", new { shortName = item.ShortName })</td>
             <td style="padding-left:30px;">@Html.ActionLink("Вверх", "Up", new { id = item.ID })</td>
             <td style="padding-left:30px;">@Html.ActionLink("Вниз", "Down", new { id = item.ID })</td>
         </tr>

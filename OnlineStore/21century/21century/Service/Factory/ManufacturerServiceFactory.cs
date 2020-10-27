@@ -9,7 +9,7 @@ namespace _21century.Service.Factory
 {
     public static class ManufacturerServiceFactory
     {
-        public static IOrderedService<Manufacturer> Create()
+        public static IUrlFriendlyService<Manufacturer> Create()
         {
             return new ManufacturerEntityService();
         }

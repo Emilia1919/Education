@@ -9,6 +9,12 @@
 <br />
 <br />
 
+@Html.LabelFor(model => model.ShortName)
+<br />
+@Html.EditorFor(model => model.ShortName)
+<span style="color:red">@Html.ValidationMessageFor(model => model.ShortName)</span>
+<br /><br />
+
 @Html.LabelFor(model => model.Description)
 <br />
 @Html.TextAreaFor(model => model.Description, new { cols = 70, rows = 5 })

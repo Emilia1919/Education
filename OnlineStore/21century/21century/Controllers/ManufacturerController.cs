@@ -10,82 +10,29 @@ using _21century.Controllers.Abstract;
 
 namespace _21century.Controllers
 {
-    public class ManufacturerController : OrderedController<Manufacturer>
+    public class ManufacturerController : UrlFriendlyController<Manufacturer>
     {
-        public ManufacturerController(IOrderedService<Manufacturer> _service) : base(_service) { }
+        public ManufacturerController(IUrlFriendlyService<Manufacturer> _service) : base(_service) { }
 
         public ManufacturerController() : this(ManufacturerServiceFactory.Create()) { }
-    }
-    /*OnlineStoreEntities entities = new OnlineStoreEntities();
 
-    public ActionResult Index()
-    {
-        var objs = service.Get();
-        return View(objs);
-    }
+        #region Overridden virtual methods
 
-    public ActionResult Details(int id)
-    {
-        Manufacturer obj = service.Get(id);
-        if (obj == null) return View("NotFound");
-        return View(obj);
-    }
-
-    public ActionResult Create()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public ActionResult Create(FormCollection collection)
-    {
-        if (ModelState.IsValid)
+        protected override ActionResult ReturnToList(Manufacturer obj)
         {
-            Manufacturer obj = new Manufacturer();
-            UpdateModel(obj, collection);
-            service.Add(obj);
-            service.Save();
-            return RedirectToAction("Details", new { id = obj.ID });
+            return RedirectToAction("GetByShortName", new { shortname = string.Empty});
         }
-        else return View();
-    }
 
-    public ActionResult Edit(int id)
-    {
-        Manufacturer obj = service.Get(id);
-        if (obj == null) return View("NotFound");
-        return View(obj);
-    }
-
-    [HttpPost]
-    public ActionResult Edit(int id, FormCollection collection)
-    {
-        Manufacturer obj = service.Get(id);
-        if (obj == null) return View("NotFound");
-
-        if (ModelState.IsValid)
+        protected override ActionResult ReturnToObject(Manufacturer obj)
         {
-            UpdateModel(obj, collection);
-            service.Save();
-            return RedirectToAction("Details", new { id = obj.ID });
+            return RedirectToAction("GetByShortName", new { shortname = obj.ShortName });
         }
-        else return View(obj);
-    }
 
-    public ActionResult Delete(int id)
-    {
-        Manufacturer obj = service.Get(id);
-        if (obj == null) return View("NotFound");
-        return View(obj);
-    }
+        protected override string GetShortNameSource(FormCollection collection)
+        {
+            return collection["Name"];
+        }
 
-    [HttpPost]
-    public ActionResult Delete(int id, FormCollection collection)
-    {
-        Manufacturer obj = service.Get(id);
-        if (obj == null) return View("NotFound");
-        service.Delete(obj);
-        service.Save();
-        return RedirectToAction("Index");
-    }*/
+        #endregion
+    }
 }

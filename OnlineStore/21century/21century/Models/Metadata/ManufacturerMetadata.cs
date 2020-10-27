@@ -15,5 +15,10 @@ namespace _21century.Models.Metadata
 
         [Display(Name = "Описание")]
         public string Description { get; set; }
+
+        [Display(Name = "Наименование отображаемое в URL")]
+        [RegularExpression("[a-z0-9_]+", ErrorMessage = "Только маленькие латинские буквы, цифры и подчёркивание")]
+        [StringLength(50)]
+        public string ShortName { get; set; }
     }
 }

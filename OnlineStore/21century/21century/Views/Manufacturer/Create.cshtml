@@ -4,27 +4,11 @@
     ViewBag.Title = string.Format("Создание производителя | {0}", _21century.Constants.TITLE);
 }
 
-<p>@Html.ActionLink("Отмена", "Index")</p>
+<p>@Html.ActionLink("Отмена", "GetByShortName", new { shortName = string.Empty })</p>
 <h2>Создание производителя</h2>
 
 @using (Html.BeginForm())
 {
-    /*@Html.ValidationSummary()
-
-    @Html.LabelFor(model => model.Name)
-    <br />
-    @Html.EditorFor(model => model.Name)
-    <span style="color:red">@Html.ValidationMessageFor(model => model.Name)</span>
-    <br />
-    <br />
-
-    @Html.LabelFor(model => model.Description)
-    <br />
-    @Html.TextAreaFor(model => model.Description, new { cols = 70, rows = 5 })
-    <span style="color:red">@Html.ValidationMessageFor(model => model.Description)</span>
-    <br />
-    <br />*/
-
     @Html.EditorForModel()
 
     <input type="submit" value="Создать" />

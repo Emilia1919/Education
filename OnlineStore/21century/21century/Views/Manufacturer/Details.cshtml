@@ -4,6 +4,13 @@
     ViewBag.Title = string.Format("{0} | Производители | {1}", Model.Name, _21century.Constants.TITLE);
 }
 
+<p>
+    @Html.ActionLink("На главную","Index","Home")
+    @_21century.Constants.BREADCRUMBS_SEPARATOR
+    @Html.ActionLink("Производители","GetByShortName", new { shortName = string.Empty})
+    @_21century.Constants.BREADCRUMBS_SEPARATOR
+    @Model.Name
+</p>
 <p>@Html.ActionLink("Редактировать", "Edit", new { id = Model.ID })&nbsp;&nbsp;&nbsp;@Html.ActionLink("Удалить", "Delete", new { id = Model.ID })</p>
 <h2>@Model.Name</h2>
 <p>@Model.Description</p>

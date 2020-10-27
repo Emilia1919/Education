@@ -8,7 +8,7 @@ using _21century.Service.Abstract;
 
 namespace _21century.Service
 {
-    public class ManufacturerEntityService : OrderedEntityService<Manufacturer>
+    public class ManufacturerEntityService : UrlFriendlyEntityService<Manufacturer>
     {
         OnlineStoreEntities entities = new OnlineStoreEntities();
         protected override System.Data.Entity.DbSet<Manufacturer> EntitySet { get { return entities.Manufacturers; } }
