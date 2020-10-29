@@ -20,12 +20,12 @@ namespace _21century.Controllers
 
         protected override ActionResult ReturnToList(Manufacturer obj)
         {
-            return RedirectToAction("GetByShortName", new { shortname = string.Empty});
+            return RedirectToAction("GetShortName", new { shortname = string.Empty});
         }
 
         protected override ActionResult ReturnToObject(Manufacturer obj)
         {
-            return RedirectToAction("GetByShortName", new { shortname = obj.ShortName });
+            return RedirectToAction("GetShortName", new { shortname = obj.ShortName });
         }
 
         protected override string GetShortNameSource(FormCollection collection)

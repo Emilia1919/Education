@@ -7,7 +7,7 @@
 <p>
     @Html.ActionLink("На главную","Index","Home")
     @_21century.Constants.BREADCRUMBS_SEPARATOR
-    @Html.ActionLink("Производители","GetByShortName", new { shortName = string.Empty})
+    @Html.ActionLink("Производители","GetShortName", new { shortName = string.Empty})
     @_21century.Constants.BREADCRUMBS_SEPARATOR
     @Model.Name
 </p>

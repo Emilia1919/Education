@@ -12,7 +12,7 @@ namespace _21century.Controllers.Abstract
     {
         public UrlFriendlyController(IUrlFriendlyService<T> _service) : base(_service) { }
 
-        public ActionResult GetByShortName(string shortName)
+        public ActionResult GetShortName(string shortName)
         {
             if (string.IsNullOrWhiteSpace(shortName))
             {

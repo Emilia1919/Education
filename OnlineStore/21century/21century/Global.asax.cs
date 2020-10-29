@@ -17,7 +17,7 @@ namespace _21century
             routes.MapRoute(
                 "Manufacturers",
                 "manufacturers/{shortname}",
-                new { controller = "Manufacturer", action = "GetByShortName", shortname = UrlParameter.Optional }
+                new { controller = "Manufacturer", action = "GetShortName", shortname = UrlParameter.Optional }
             );
         }
         protected void Application_Start()
