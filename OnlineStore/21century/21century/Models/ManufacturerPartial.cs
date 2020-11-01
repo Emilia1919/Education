@@ -12,11 +12,9 @@ namespace _21century.Models
     [MetadataType(typeof(ManufacturerMetadata))]
     public partial class Manufacturer : IUrlFriendly
     {
-        public string ShortName { get; set; }
-        public int? Sequence { get; set; }
-
         public bool CanBeDeleted()
         {
+            if (Products.Count > 0) return false;
             return true;
         }
     }

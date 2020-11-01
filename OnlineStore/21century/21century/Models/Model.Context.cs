@@ -26,5 +26,6 @@ namespace _21century.Models
         }
     
         public virtual DbSet<Manufacturer> Manufacturers { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }

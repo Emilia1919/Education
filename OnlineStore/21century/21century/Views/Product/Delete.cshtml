@@ -1,0 +1,17 @@
+﻿@model _21century.Models.Product
+
+@{
+    ViewBag.Title = string.Format("Удаление товара | {0}", _21century.Constants.TITLE);
+}
+
+<p>@Html.ActionLink("Отмена", "GetByShortName", new { shortname = Model.ShortName })</p>
+<h2 style="color:Red">Вы уверены, что хотите удалить этот товар?</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Удалить" />
+}
+
+<p style="font-weight:bold">@Model.Name</p>
+<p><span style="font-weight:bold">Производитель: </span>@Model.Manufacturer.Name</p>
+<p>@Model.Description</p>

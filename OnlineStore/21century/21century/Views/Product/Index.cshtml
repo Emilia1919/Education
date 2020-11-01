@@ -1,0 +1,25 @@
+﻿@model IEnumerable<_21century.Models.Product>
+
+@{
+    ViewBag.Title = string.Format("Товары | {0}", _21century.Constants.TITLE);
+}
+
+<p>
+    @Html.ActionLink("На главную", "Index", "Home")
+    @_21century.Constants.BREADCRUMBS_SEPARATOR
+    Товары
+</p>
+
+<h2>Товары</h2>
+<p>@Html.ActionLink("Создать", "Create")</p>
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(item.Name, "GetShortName", new { shortname = item.ShortName })</td>
+            <td style="padding-left:30px">@Html.ActionLink("Вверх", "Up", new { id = item.ID })</td>
+            <td style="padding-left:30px">@Html.ActionLink("Вниз", "Down", new { id = item.ID })</td>
+        </tr>
+    }
+</table>

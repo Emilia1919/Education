@@ -1,0 +1,36 @@
+﻿@model _21century.Models.Product
+
+@{
+    ViewBag.Title = string.Format("{0} | Товары | {1}", Model.Name, _21century.Constants.TITLE);
+}
+
+<p>
+    @{
+        List<string> path = _21century.Helper.GetUrlPath(Request);
+
+        if (path.Count == 2)
+        {
+            @Html.ActionLink("На главную", "Index", "Home")
+            @_21century.Constants.BREADCRUMBS_SEPARATOR
+            @Html.ActionLink("Товары", "GetShortName", new { shortname = string.Empty })
+            @_21century.Constants.BREADCRUMBS_SEPARATOR
+            @Model.Name
+        }
+        else if (_21century.Helper.GetUrlPath(Request).Count == 3)
+        {
+            @Html.ActionLink("На главную", "Index", "Home")
+            @_21century.Constants.BREADCRUMBS_SEPARATOR
+            @Html.ActionLink("Производители", "GetShortName", "Manufacturer", new { shortname = string.Empty }, null)
+            @_21century.Constants.BREADCRUMBS_SEPARATOR
+            @Html.ActionLink(_21century.Service.Factory.ManufacturerServiceFactory.Create().Get(path[1]).Name, "GetShortName", "Manufacturer", new { shortname = path[1] }, null)
+            @_21century.Constants.BREADCRUMBS_SEPARATOR
+            @Model.Name
+        }
+    }
+</p>
+
+<p>@Html.ActionLink("Редактировать", "Edit", new { id = Model.ID })&nbsp;&nbsp;&nbsp;@Html.ActionLink("Удалить", "Delete", new { id = Model.ID })</p>
+<h2>@Model.Name</h2>
+<p><span style="font-weight:bold">Цена: </span>@Model.Price руб.</p>
+<p><span style="font-weight:bold">Производитель: </span>@Model.Manufacturer.Name</p>
+<p>@Model.Description</p>
