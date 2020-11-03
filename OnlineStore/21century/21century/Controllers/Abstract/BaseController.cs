@@ -12,6 +12,7 @@ namespace _21century.Controllers.Abstract
     {
         protected IBaseService<T> service;
 
+        protected virtual bool IsPageable { get { return false; } }
         public BaseController(IBaseService<T> _service)
         {
             service = _service;
@@ -21,7 +22,17 @@ namespace _21century.Controllers.Abstract
 
         public virtual ActionResult Index()
         {
-            IEnumerable<T> objs = service.Get();
+            IEnumerable<T> objs = null;
+
+            if (IsPageable)
+            {
+                int page = 1;
+                if (Request.QueryString["page"] != null) page = int.Parse(Request.QueryString["page"]);
+                if (page < 1) page = 1;
+                objs = service.Get((page - 1) * Constants.PAGER_LINKS_PER_PAGE, Constants.PAGER_LINKS_PER_PAGE);
+            }
+            else objs = service.Get();
+
             return View(objs);
         }
 
@@ -105,12 +116,12 @@ namespace _21century.Controllers.Abstract
 
         protected virtual ActionResult ReturnToList(T obj)
         {
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { page = Request.QueryString["page"]});
         }
 
         protected virtual ActionResult ReturnToObject(T obj)
         {
-            return RedirectToAction("Details", new { id = obj.ID });
+            return RedirectToAction("Details", new { id = obj.ID, page = Request.QueryString["page"] });
         }
 
         protected virtual ActionResult OnCreated(T obj)

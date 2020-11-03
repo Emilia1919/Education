@@ -4,7 +4,7 @@
     ViewBag.Title = string.Format("Создание товара | {0}", _21century.Constants.TITLE);
 }
 
-<p>@Html.ActionLink("Отмена", "GetByShortName", new { shortname = string.Empty })</p>
+<p>@Html.ActionLink("Отмена", "GetShortName", new { shortname = string.Empty })</p>
 <h2>Создание товара</h2>
 
 @using (Html.BeginForm())

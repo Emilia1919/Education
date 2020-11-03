@@ -23,3 +23,9 @@
         </tr>
     }
 </table>
+
+<br /><br />
+
+<div class="pager">
+    @Html.Partial("_Pager", (new _21century.Pager(Request.QueryString["page"], _21century.Service.Factory.ProductServiceFactory.Create().Get().Count(), Request.QueryString)).Links)
+</div>

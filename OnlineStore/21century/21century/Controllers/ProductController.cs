@@ -15,16 +15,18 @@ namespace _21century.Controllers
         public ProductController(IUrlFriendlyService<Product> _service) : base(_service) { }
         public ProductController() : this(ProductServiceFactory.Create()) { }
 
+        protected override bool IsPageable { get { return true; } }
+
         #region Overidden virtual methods
 
         protected override ActionResult ReturnToList(Product obj)
         {
-            return RedirectToAction("GetShortName", new { shortname = string.Empty });
+            return RedirectToAction("GetShortName", new { shortname = string.Empty, page = Request.QueryString["page"] });
         }
 
         protected override ActionResult ReturnToObject(Product obj)
         {
-            return RedirectToAction("GetShortName", new { shortname = obj.ShortName });
+            return RedirectToAction("GetShortName", new { shortname = obj.ShortName, page = Request.QueryString["page"] });
         }
 
         protected override string GetShortNameSource(FormCollection collection)

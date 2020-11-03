@@ -166,6 +166,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductPartial.cs" />
+    <Compile Include="Pager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Abstract\BaseEntityService.cs" />
     <Compile Include="Service\Abstract\OrderedEntityService.cs" />
@@ -262,6 +263,7 @@
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\Product\DeleteFail.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Product.cshtml" />
+    <Content Include="Views\Shared\_Pager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
