@@ -5,12 +5,16 @@
 }
 
 <p>
-    @Html.ActionLink("На главную","Index","Home")
+    @Html.ActionLink("На главную", "Index", "Home")
     @_21century.Constants.BREADCRUMBS_SEPARATOR
-    @Html.ActionLink("Производители","GetShortName", new { shortName = string.Empty})
+    @Html.ActionLink("Производители", "GetShortName", new { shortName = string.Empty })
     @_21century.Constants.BREADCRUMBS_SEPARATOR
     @Model.Name
 </p>
-<p>@Html.ActionLink("Редактировать", "Edit", new { id = Model.ID })&nbsp;&nbsp;&nbsp;@Html.ActionLink("Удалить", "Delete", new { id = Model.ID })</p>
+
+@if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
+{
+    <p>@Html.ActionLink("Редактировать", "Edit", new { id = Model.ID })&nbsp;&nbsp;&nbsp;@Html.ActionLink("Удалить", "Delete", new { id = Model.ID })</p>
+}
 <h2>@Model.Name</h2>
 <p>@Model.Description</p>

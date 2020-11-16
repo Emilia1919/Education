@@ -13,6 +13,10 @@ namespace _21century
         public const int PAGER_LINKS_PER_PAGE = 15;
         public const int PAGER_NUMBER_OF_VISIBLE_LINKS = 5;
 
+        public const string ROLE_ADMIN = "admin";
+        public const string ROLE_CONTENT_MANAGER = "contentmanager";
+        public const string ROLES_ADMIN_CONTENT_MANAGER = "admin,contentmanager";
+
         public static readonly List<string> RESERVED_WORDS = new List<string>()
         {
             "home","account","index","details","create","edit","delete","up","down",

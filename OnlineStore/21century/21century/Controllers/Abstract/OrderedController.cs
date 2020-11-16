@@ -14,6 +14,7 @@ namespace _21century.Controllers.Abstract
 
         #region Actions
 
+        [Authorize(Roles = Constants.ROLES_ADMIN_CONTENT_MANAGER)]
         public ActionResult Up(int id)
         {
             T obj = service.Get(id);
@@ -40,6 +41,7 @@ namespace _21century.Controllers.Abstract
             }
         }
 
+        [Authorize(Roles = Constants.ROLES_ADMIN_CONTENT_MANAGER)]
         public ActionResult Down(int id)
         {
             T obj = service.Get(id);

@@ -43,6 +43,7 @@ namespace _21century.Controllers.Abstract
             return View(obj);
         }
 
+        [Authorize(Roles = Constants.ROLES_ADMIN_CONTENT_MANAGER)]
         public virtual ActionResult Create()
         {
             return View();
@@ -89,6 +90,7 @@ namespace _21century.Controllers.Abstract
             else return View(obj);
         }
 
+        [Authorize(Roles = Constants.ROLES_ADMIN_CONTENT_MANAGER)]
         public virtual ActionResult Delete(int id)
         {
             T obj = service.Get(id);
