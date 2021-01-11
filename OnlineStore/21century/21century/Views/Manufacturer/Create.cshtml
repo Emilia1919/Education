@@ -4,12 +4,12 @@
     ViewBag.Title = string.Format("Создание производителя | {0}", _21century.Constants.TITLE);
 }
 
-<p>@Html.ActionLink("Отмена", "GetShortName", new { shortName = string.Empty })</p>
-<h2>Создание производителя</h2>
+<p>@Html.ActionLink("Отмена", "GetShortName", new { shortName = string.Empty }, new {@style="color: #808080;" })</p>
+<h2 style="color: #b200ff; padding-bottom: 15px">Создание производителя</h2>
 
 @using (Html.BeginForm())
 {
     @Html.EditorForModel()
 
-    <input type="submit" value="Создать" />
+    <button type="submit" class="btn btn-warning">Создать</button>
 }

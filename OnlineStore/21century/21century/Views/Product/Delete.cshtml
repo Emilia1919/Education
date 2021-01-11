@@ -4,14 +4,15 @@
     ViewBag.Title = string.Format("Удаление товара | {0}", _21century.Constants.TITLE);
 }
 
-<p>@Html.ActionLink("Отмена", "GetShortName", new { shortname = Model.ShortName, page = Request.QueryString["page"] })</p>
-<h2 style="color:Red">Вы уверены, что хотите удалить этот товар?</h2>
+<p>@Html.ActionLink("Отмена", "GetShortName", new { shortname = Model.ShortName, page = Request.QueryString["page"] }, new {@style="color: #808080;" })</p>
+<h2 style="color:red; padding-bottom: 15px">Вы уверены, что хотите удалить этот товар?</h2>
+
+<h2 style="font-weight:bold; color: #ffffff">@Model.Name</h2>
+<p style="color: #ffd800"><span style="font-weight:bold; color: #ffffff">Производитель: </span>@Model.Manufacturer.Name</p>
+<p style="color: #ffffff">@Model.Description</p>
 
 @using (Html.BeginForm())
 {
-    <input type="submit" value="Удалить" />
-}
 
-<p style="font-weight:bold">@Model.Name</p>
-<p><span style="font-weight:bold">Производитель: </span>@Model.Manufacturer.Name</p>
-<p>@Model.Description</p>
+    <button type="submit" class="btn btn-danger">Удалить</button>
+}

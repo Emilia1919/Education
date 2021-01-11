@@ -10,9 +10,9 @@
 
         if (path.Count == 2)
         {
-            @Html.ActionLink("На главную", "Index", "Home")
+            @Html.ActionLink("На главную", "Index", "Home",new {@style="color: #808080;" })
             @_21century.Constants.BREADCRUMBS_SEPARATOR
-            @Html.ActionLink("Товары", "GetShortName", new { shortname = string.Empty })
+            @Html.ActionLink("Товары", "GetShortName", new { shortname = string.Empty },new {@style="color: #808080;" })
             @_21century.Constants.BREADCRUMBS_SEPARATOR
             @Model.Name
         }
@@ -30,7 +30,7 @@
 </p>
 
 <p>@Html.ActionLink("Редактировать", "Edit", new { id = Model.ID, page = Request.QueryString["page"]})&nbsp;&nbsp;&nbsp;@Html.ActionLink("Удалить", "Delete", new { id = Model.ID })</p>
-<h2>@Model.Name</h2>
-<p><span style="font-weight:bold">Цена: </span>@Model.Price руб.</p>
-<p><span style="font-weight:bold">Производитель: </span>@Model.Manufacturer.Name</p>
-<p>@Model.Description</p>
+<h2 style="color: #ffffff">@Model.Name</h2>
+<p style="color: #ffd800"><span style="font-weight:bold; color: #ffffff">Цена: </span>@Model.Price руб.</p>
+<p style="color: #ffd800"><span style="font-weight:bold; color: #ffffff">Производитель: </span>@Model.Manufacturer.Name</p>
+<p style="color: #ffffff">@Model.Description</p>

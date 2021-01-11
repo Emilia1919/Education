@@ -7,7 +7,7 @@ namespace _21century
 {
     public static class Constants
     {
-        public const string TITLE = "Интернет-магазин '21 век'";
+        public const string TITLE = "Фасад Стандарт";
 
         public const string BREADCRUMBS_SEPARATOR = " > ";
         public const int PAGER_LINKS_PER_PAGE = 15;

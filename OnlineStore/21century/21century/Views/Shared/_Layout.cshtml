@@ -27,10 +27,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Каталог", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Производители", "GetShortName", "Manufacturer", new { shortName = string.Empty }, null)</li>
-                    <li>@Html.ActionLink("Товары", "GetShortName", "Product", new { shortname = string.Empty }, null)</li>
+                    <li>@Html.ActionLink("Каталог", "GetShortName", "Product", new { shortname = string.Empty }, null)</li>
+                    <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Личная страница", "Index", "Personal")</li>
@@ -53,9 +52,10 @@
             </div>
             <div class="col-md-4">
                 <h3 style="color: #959393">Содержание сайта</h3>
-                <p>@Html.ActionLink("Каталог", "About", "Home")</p>
+                <p>@Html.ActionLink("Каталог", "GetShortName", "Product", new { shortname = string.Empty }, null)</p>
+                <p>@Html.ActionLink("Производители", "GetShortName", "Manufacturer", new { shortName = string.Empty }, null)</p>
                 <p>@Html.ActionLink("Контакты", "Contact", "Home")</p>
-                <p>@Html.ActionLink("О нас", "Aboutabout", "Home")</p>
+                <p>@Html.ActionLink("О нас", "About", "Home")</p>
             </div>
             <div class="col-md-4">
                 <h3 style="color: #959393">Система оплат</h3>
