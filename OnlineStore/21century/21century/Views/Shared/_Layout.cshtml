@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Facad Standart</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
@@ -13,23 +13,22 @@
         }
     </style>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<body style="background: #161515">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="border-color: #161515; background: #161515">
         <div class="container">
             <div class="navbar-header">
-                <h5>@_21century.Constants.TITLE</h5>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <!-- @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })-->
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Информация", "About", "Home")</li>
-                    <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Каталог", "About", "Home")</li>
+                    <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Производители", "GetShortName", "Manufacturer", new { shortName = string.Empty }, null)</li>
                     <li>@Html.ActionLink("Товары", "GetShortName", "Product", new { shortname = string.Empty }, null)</li>
                     @if (User.Identity.IsAuthenticated)
@@ -45,7 +44,26 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
+            <div class="col-md-4">
+                <h3 style="color: #959393">Компания</h3>
+                <p>Facad Standart 2021</p>
+                <p>A1/Viber: +375 (044) 7-236-236, +375 (29) 16-99-400</p>
+                <p>MTS: +375 (29) 7-236-236</p>
+                <p>Email: 7236236@gmail.com</p>
+            </div>
+            <div class="col-md-4">
+                <h3 style="color: #959393">Содержание сайта</h3>
+                <p>@Html.ActionLink("Каталог", "About", "Home")</p>
+                <p>@Html.ActionLink("Контакты", "Contact", "Home")</p>
+                <p>@Html.ActionLink("О нас", "Aboutabout", "Home")</p>
+            </div>
+            <div class="col-md-4">
+                <h3 style="color: #959393">Система оплат</h3>
+                <img src="Image/visa.png" width="48px" height="48px">
+                <img src="Image/mastercard.png" width="48px" height="48px">
+                <img src="Image/american-express.png" width="48px" height="48px">
+                <img src="Image/belkart.svg" width="48px" height="48px">
+            </div>
         </footer>
     </div>
 
