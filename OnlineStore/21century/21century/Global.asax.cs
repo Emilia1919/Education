@@ -35,6 +35,11 @@ namespace _21century
                 "manufacturers/{manufacturer}/{product}",
                 new { controller = "Product", aciton = "GetProductInManufacturer" }
                 );
+            routes.MapRoute(
+                "Categories",
+                "catalog/{shortname}",
+                new { controller = "Category", action = "GetShortName", shortname = UrlParameter.Optional }
+        );
         }
 
         public static void AddAdmin()

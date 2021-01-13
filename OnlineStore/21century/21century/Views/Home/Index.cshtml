@@ -1,16 +1,16 @@
 ﻿@{
     ViewBag.Title = "Facad Standart";
 }
-    
-    <div class="jumbotron" style="background: none;">
-        <h1 style="color:#ffffff; font-family: Impact, Helvetica, Arial, sans-serif;">Facad Stand <text style="color:#00CC33">Art</text></h1>
-        <p class="lead" style="color:#ffffff">Мы рады сообщить Вам об открытии нового шоу-рума плитных материалов и фасадов, который находится на 1 этаже здания Westline – одного из самых известных поставщиков европейской фурнитуры.</p>
-    </div>
-    
-    <div style="padding-bottom: 80px">
-        <img src="Image/slide1.jpg" width="568px" height="350px">
-        <img src="Image/slide2.png" width="568px" height="350px">
-    </div>
+
+<div class="jumbotron" style="background: none;">
+    <h1 style="color:#ffffff; font-family: Impact, Helvetica, Arial, sans-serif;">Facad Stand <text style="color:#00CC33">Art</text></h1>
+    <p class="lead" style="color:#ffffff">Мы рады сообщить Вам об открытии нового шоу-рума плитных материалов и фасадов, который находится на 1 этаже здания Westline – одного из самых известных поставщиков европейской фурнитуры.</p>
+</div>
+
+<div style="padding-bottom: 80px">
+    <img src="Image/slide1.jpg" width="568px" height="350px">
+    <img src="Image/slide2.png" width="568px" height="350px">
+</div>
 
 <div style="background: #808080; text-align:center; padding-top: 1px; padding-bottom: 1px; opacity: 0.9">
     <h3 style="font-family: Arial, Helvetica, Arial, sans-serif; color: #333333">КАК ПОЛУЧИТЬ НЕОБХОДИМЫЕ ВАМ ФАСАДЫ ДЛЯ КУХНИ, С ДОСТАВКОЙ?</h3>
@@ -56,3 +56,28 @@
         <p>Мы доставим его по указанаму Вами адресу, Вам остается лишь получить его.</p>
     </div>
 </div>
+
+@model IEnumerable<_21century.Models.Category>
+
+@{
+    ViewBag.Title = _21century.Constants.TITLE;
+}
+
+@if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
+{
+    <p>@Html.ActionLink("Создать категорию", "Create", "Category")</p>
+}
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(item.Name, "GetShortName", "Category", new { shortname = item.ShortName }, null)</td>
+            @if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
+            {
+                <td style="padding-left:30px">@Html.ActionLink("Вверх", "Up", "Category", new { id = item.ID }, null)</td>
+                <td style="padding-left:30px">@Html.ActionLink("Вниз", "Down", "Category", new { id = item.ID }, null)</td>
+            }
+        </tr>
+    }
+</table>

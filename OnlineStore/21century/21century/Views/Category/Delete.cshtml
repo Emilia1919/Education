@@ -1,0 +1,15 @@
+﻿@model _21century.Models.Category
+
+@{
+    ViewBag.Title = string.Format("Удаление категории | {0}", _21century.Constants.TITLE);
+}
+
+<p>@Html.ActionLink("Отмена", "GetShortName", new { shortname = Model.ShortName })</p>
+<h2 style="color:Red">Вы уверены, что хотите удалить эту категорию?</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Удалить" />
+}
+
+<p style="font-weight:bold">@Model.Name</p>

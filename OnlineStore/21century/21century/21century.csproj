@@ -162,6 +162,7 @@
     <Compile Include="Controllers\Abstract\OrderedController.cs" />
     <Compile Include="Controllers\Abstract\UrlFriendlyController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />
@@ -170,6 +171,9 @@
     </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Interface\IBase.cs" />
     <Compile Include="Models\Interface\IOrdered.cs" />
@@ -179,6 +183,8 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManufacturerPartial.cs" />
+    <Compile Include="Models\Metadata\CategoryMetadata.cs" />
+    <Compile Include="Models\CategoryPartial.cs" />
     <Compile Include="Models\Metadata\ManufacturerMetadata.cs" />
     <Compile Include="Models\Metadata\ProductMetadata.cs" />
     <Compile Include="Models\Model.Context.cs">
@@ -206,6 +212,8 @@
     <Compile Include="Service\Abstract\OrderedEntityService.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Service\Abstract\UrlFriendlyEntityService.cs" />
+    <Compile Include="Service\CategoryEntityService.cs" />
+    <Compile Include="Service\Factory\CategoryServiceFactory.cs" />
     <Compile Include="Service\Factory\ManufacturerServiceFactory.cs" />
     <Compile Include="Service\Factory\ProductServiceFactory.cs" />
     <Compile Include="Service\Interface\IBaseService.cs" />
@@ -318,6 +326,12 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\DeleteFail.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
