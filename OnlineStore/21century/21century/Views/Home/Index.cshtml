@@ -57,6 +57,7 @@
     </div>
 </div>
 
+
 @model IEnumerable<_21century.Models.Category>
 
 @{
@@ -67,7 +68,6 @@
 {
     <p>@Html.ActionLink("Создать категорию", "Create", "Category")</p>
 }
-
 <table>
     @foreach (var item in Model)
     {

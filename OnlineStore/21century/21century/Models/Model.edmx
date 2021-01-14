@@ -14,6 +14,15 @@
           <Property Name="ShortName" Type="nvarchar" MaxLength="50" />
           <Property Name="Sequence" Type="int" />
         </EntityType>
+        <EntityType Name="CategoryProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryID" Type="nchar" MaxLength="10" />
+          <Property Name="ProductID" Type="nchar" MaxLength="10" />
+          <Property Name="Sequence" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
             <PropertyRef Name="ID" />
@@ -50,6 +59,7 @@
         </Association>
         <EntityContainer Name="Хранилище OnlineStoreModelContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryProduct" EntityType="Self.CategoryProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Product_Manufacturer" Association="Self.FK_Product_Manufacturer">
@@ -84,6 +94,8 @@
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ManufacturerID" Type="Int32" />
           <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
+          <Property Name="CategoryProductID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategoryProducts" Relationship="OnlineStoreModel.CategoryProductProduct" FromRole="Product" ToRole="CategoryProduct" />
         </EntityType>
         <Association Name="FK_Product_Manufacturer">
           <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
@@ -105,6 +117,15 @@
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           <EntitySet Name="Categories" EntityType="OnlineStoreModel.Category" />
+          <EntitySet Name="CategoryProducts" EntityType="OnlineStoreModel.CategoryProduct" />
+          <AssociationSet Name="CategoryProductCategory" Association="OnlineStoreModel.CategoryProductCategory">
+            <End Role="CategoryProduct" EntitySet="CategoryProducts" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="CategoryProductProduct" Association="OnlineStoreModel.CategoryProductProduct">
+            <End Role="CategoryProduct" EntitySet="CategoryProducts" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -114,7 +135,28 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Sequence" Type="Int32" />
+          <Property Name="CategoryProductID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategoryProducts" Relationship="OnlineStoreModel.CategoryProductCategory" FromRole="Category" ToRole="CategoryProduct" />
         </EntityType>
+        <EntityType Name="CategoryProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ProductID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Sequence" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="OnlineStoreModel.CategoryProductCategory" FromRole="CategoryProduct" ToRole="Category" />
+          <NavigationProperty Name="Product" Relationship="OnlineStoreModel.CategoryProductProduct" FromRole="CategoryProduct" ToRole="Product" />
+        </EntityType>
+        <Association Name="CategoryProductCategory">
+          <End Type="OnlineStoreModel.CategoryProduct" Role="CategoryProduct" Multiplicity="*" />
+          <End Type="OnlineStoreModel.Category" Role="Category" Multiplicity="1" />
+        </Association>
+        <Association Name="CategoryProductProduct">
+          <End Type="OnlineStoreModel.CategoryProduct" Role="CategoryProduct" Multiplicity="*" />
+          <End Type="OnlineStoreModel.Product" Role="Product" Multiplicity="1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -151,6 +193,16 @@
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="ShortName" ColumnName="ShortName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryProducts">
+            <EntityTypeMapping TypeName="OnlineStoreModel.CategoryProduct">
+              <MappingFragment StoreEntitySet="CategoryProduct">
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

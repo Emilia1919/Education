@@ -39,7 +39,12 @@ namespace _21century
                 "Categories",
                 "catalog/{shortname}",
                 new { controller = "Category", action = "GetShortName", shortname = UrlParameter.Optional }
-        );
+                );
+            routes.MapRoute(
+                "ProductInCategory",
+                "catalog/{category}/products/{product}",
+                new { controller = "Product", action = "GetProductInCategory" }
+                );
         }
 
         public static void AddAdmin()

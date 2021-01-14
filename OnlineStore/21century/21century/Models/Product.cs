@@ -14,6 +14,12 @@ namespace _21century.Models
     
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.CategoryProducts = new HashSet<CategoryProduct>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
@@ -21,7 +27,10 @@ namespace _21century.Models
         public string Description { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<int> ManufacturerID { get; set; }
+        public int CategoryProductID { get; set; }
     
         public virtual Manufacturer Manufacturer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoryProduct> CategoryProducts { get; set; }
     }
 }

@@ -50,5 +50,13 @@ namespace _21century.Controllers
             if (obj == null) return View("NotFound");
             return View("Details", obj);
         }
+
+        // Переход на страницу товара со страницы категории
+        public ActionResult GetProductInCategory(string category, string product)
+        {
+            Product obj = (service as IUrlFriendlyService<Product>).Get(product);
+            if (obj == null) return View("NotFound");
+            return View("Details", obj);
+        }
     }
 }
