@@ -178,6 +178,7 @@
     <Compile Include="Models\CategoryProduct.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryProductPartial.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Interface\IBase.cs" />
     <Compile Include="Models\Interface\IOrdered.cs" />

@@ -15,9 +15,9 @@ namespace _21century.Models
     public partial class CategoryProduct
     {
         public int ID { get; set; }
-        public string CategoryID { get; set; }
-        public string ProductID { get; set; }
-        public string Sequence { get; set; }
+        public Nullable<int> CategoryID { get; set; }
+        public Nullable<int> ProductID { get; set; }
+        public Nullable<int> Sequence { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Product Product { get; set; }

@@ -19,9 +19,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CategoryID" Type="nchar" MaxLength="10" />
-          <Property Name="ProductID" Type="nchar" MaxLength="10" />
-          <Property Name="Sequence" Type="nchar" MaxLength="10" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Sequence" Type="int" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -126,7 +126,7 @@
             <End Role="CategoryProduct" EntitySet="CategoryProducts" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="ID" />
@@ -143,9 +143,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ProductID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Sequence" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Sequence" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="OnlineStoreModel.CategoryProductCategory" FromRole="CategoryProduct" ToRole="Category" />
           <NavigationProperty Name="Product" Relationship="OnlineStoreModel.CategoryProductProduct" FromRole="CategoryProduct" ToRole="Product" />
         </EntityType>
@@ -157,7 +157,7 @@
           <End Type="OnlineStoreModel.CategoryProduct" Role="CategoryProduct" Multiplicity="*" />
           <End Type="OnlineStoreModel.Product" Role="Product" Multiplicity="1" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
