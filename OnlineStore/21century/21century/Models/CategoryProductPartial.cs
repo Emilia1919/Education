@@ -6,7 +6,7 @@ using _21century.Models.Interface;
 
 namespace _21century.Models
 {
-    public partial class CategoryProductPartial : IOrdered
+    public partial class CategoryProduct : IOrdered
     {
         public bool CanBeDeleted()
         {
