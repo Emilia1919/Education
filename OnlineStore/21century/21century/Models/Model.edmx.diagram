@@ -12,6 +12,10 @@
         <EntityTypeShape EntityType="OnlineStoreModel.CategoryProduct" Width="1.5" PointX="4.875" PointY="0.875" />
         <AssociationConnector Association="OnlineStoreModel.FK_CategoryProduct_Category" />
         <AssociationConnector Association="OnlineStoreModel.FK_CategoryProduct_Product" />
+        <EntityTypeShape EntityType="OnlineStoreModel.Order" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="OnlineStoreModel.OrderItem" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="OnlineStoreModel.OrderStatus" Width="1.5" PointX="5.75" PointY="4.75" />
+        <AssociationConnector Association="OnlineStoreModel.FK_OrderItem_Order" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -162,11 +162,14 @@
     <Compile Include="Controllers\Abstract\OrderedController.cs" />
     <Compile Include="Controllers\Abstract\UrlFriendlyController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CategoryProductController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />
+    <Compile Include="Controllers\OrderStatusController.cs" />
+    <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,6 +194,7 @@
     <Compile Include="Models\Metadata\CategoryMetadata.cs" />
     <Compile Include="Models\CategoryPartial.cs" />
     <Compile Include="Models\Metadata\ManufacturerMetadata.cs" />
+    <Compile Include="Models\Metadata\OrderStatusMetadata.cs" />
     <Compile Include="Models\Metadata\ProductMetadata.cs" />
     <Compile Include="Models\Model.Context.cs">
       <AutoGen>True</AutoGen>
@@ -207,10 +211,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderItemPartial.cs" />
+    <Compile Include="Models\OrderPartial.cs" />
+    <Compile Include="Models\OrderStatus.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatusPartial.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductPartial.cs" />
+    <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Pager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Abstract\BaseEntityService.cs" />
@@ -222,13 +239,20 @@
     <Compile Include="Service\Factory\CategoryProductServiceFactory.cs" />
     <Compile Include="Service\Factory\CategoryServiceFactory.cs" />
     <Compile Include="Service\Factory\ManufacturerServiceFactory.cs" />
+    <Compile Include="Service\Factory\OrderItemServiceFactory.cs" />
+    <Compile Include="Service\Factory\OrderServiceFactory.cs" />
+    <Compile Include="Service\Factory\OrderStatusServiceFactory.cs" />
     <Compile Include="Service\Factory\ProductServiceFactory.cs" />
     <Compile Include="Service\Interface\IBaseService.cs" />
     <Compile Include="Service\Interface\IOrderedService.cs" />
     <Compile Include="Service\Interface\IUrlFriendlyService.cs" />
     <Compile Include="Service\ManufacturerEntityService.cs" />
+    <Compile Include="Service\OrderEntityService.cs" />
+    <Compile Include="Service\OrderItemEntityService.cs" />
+    <Compile Include="Service\OrderStatusEntityService.cs" />
     <Compile Include="Service\ProductEntityService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\Class1.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\21century.dll" />
@@ -339,6 +363,11 @@
     <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\Category\DeleteFail.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Category.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\OrderStatus\Index.cshtml" />
+    <Content Include="Views\OrderStatus\Create.cshtml" />
+    <Content Include="Views\OrderStatus\Edit.cshtml" />
+    <Content Include="Views\Personal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

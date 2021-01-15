@@ -29,5 +29,8 @@ namespace _21century.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CategoryProduct> CategoryProducts { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
     }
 }

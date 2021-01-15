@@ -7,13 +7,13 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-<p>@Html.ActionLink("Отмена", "Index", "Home")</p>
+<p>@Html.ActionLink("Отмена", "Index", "Home", new { @style = "color: #808080;" })</p>
 
-<h2>Создание категории</h2>
+<h2 style="color: #b200ff">Создание категории</h2>
 
 @using (Html.BeginForm())
 {
     @Html.EditorForModel()
 
-    <input type="submit" value="Создать" />
+    <button type="submit" class="btn btn-warning">Создать</button>
 }

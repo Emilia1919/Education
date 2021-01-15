@@ -1,0 +1,56 @@
+﻿@model Dictionary<int, int>
+ 
+@{
+    ViewBag.Title = string.Format("Корзина | {0}", _21century.Constants.TITLE);
+}
+ 
+<p>
+    @Html.ActionLink("На главную", "Index", "Home", new { @style = "color: #808080;" })
+    @_21century.Constants.BREADCRUMBS_SEPARATOR
+    Корзина
+</p>
+ 
+<h2 style="color: #ffffff">Корзина</h2>
+ 
+@if (Model == null || Model.Count == 0)
+{
+    @:Корзина пуста
+}
+else
+{
+    decimal price = 0;
+    
+    <table>
+    @foreach (var key in Model.Keys)
+    {
+        _21century.Models.Product product = _21century.Service.Factory.ProductServiceFactory.Create().Get(key);
+        price += product.Price.HasValue ? product.Price.Value * Model[key] : 0;
+        
+        <tr>
+            <td style="color: #ffffff">@product.Name</td>
+            <td style="padding-left: 30px">
+                @using (Html.BeginForm("ChangeValue", "Cart", FormMethod.Post))
+                {
+                    @Html.TextBox("number", Model[key], new { style = "width:30px" })
+                    @Html.Hidden("id", key)
+                    <button type="submit" class="btn btn-success">Изменить количество</button>
+                }
+            </td>
+            <td style="color: #ffffff; padding-left: 30px">  @(product.Price.HasValue ? product.Price.Value * Model[key] : 0) руб.</td>
+            <td style="padding-left: 30px">
+                @using (Html.BeginForm("Delete", "Cart", FormMethod.Post, new { onsubmit = "javascript:return confirm('Вы уверены?');" }))
+                {
+                    @Html.Hidden("id", key)
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                }
+            </td>
+        </tr>
+    }
+    <tr>
+        <td style="padding-top:20px; font-weight:bold; color: #ffd800">Итого:</td>
+        <td>&nbsp;</td>
+        <td style="padding-top:20px; font-weight:bold; color: #ffd800">  @price руб.</td>
+        <td>&nbsp;</td>
+    </tr>
+    </table>
+}

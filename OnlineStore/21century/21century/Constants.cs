@@ -13,6 +13,14 @@ namespace _21century
         public const int PAGER_LINKS_PER_PAGE = 15;
         public const int PAGER_NUMBER_OF_VISIBLE_LINKS = 5;
 
+        public const string SESSION_CART = "Cart";
+
+        public const string PROFILE_FIRST_NAME = "FirstName";
+        public const string PROFILE_MIDDLE_NAME = "MiddleName";
+        public const string PROFILE_LAST_NAME = "LastName";
+        public const string PROFILE_PHONE = "Phone";
+        public const string PROFILE_ADDRESS = "Address";
+
         public const string ROLE_ADMIN = "admin";
         public const string ROLE_CONTENT_MANAGER = "contentmanager";
         public const string ROLES_ADMIN_CONTENT_MANAGER = "admin,contentmanager";

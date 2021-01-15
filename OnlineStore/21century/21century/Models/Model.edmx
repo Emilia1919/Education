@@ -33,6 +33,39 @@
           <Property Name="Sequence" Type="int" />
           <Property Name="ShortName" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="OrderStatus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OrderItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manufacturer" Type="nvarchar" MaxLength="50" />
+          <Property Name="Number" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sequence" Type="int" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ID" />
@@ -69,6 +102,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderItem_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Manufacturer">
           <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -85,6 +130,9 @@
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryProduct" EntityType="Self.CategoryProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderItem" EntityType="Self.OrderItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CategoryProduct_Category" Association="Self.FK_CategoryProduct_Category">
             <End Role="Category" EntitySet="Category" />
@@ -93,6 +141,10 @@
           <AssociationSet Name="FK_CategoryProduct_Product" Association="Self.FK_CategoryProduct_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="CategoryProduct" EntitySet="CategoryProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItem_Order" Association="Self.FK_OrderItem_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderItem" EntitySet="OrderItem" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Manufacturer" Association="Self.FK_Product_Manufacturer">
             <End Role="Manufacturer" EntitySet="Manufacturer" />
@@ -157,6 +209,13 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="CategoryProduct" EntitySet="CategoryProducts" />
           </AssociationSet>
+          <EntitySet Name="Orders" EntityType="OnlineStoreModel.Order" />
+          <EntitySet Name="OrderItems" EntityType="OnlineStoreModel.OrderItem" />
+          <EntitySet Name="OrderStatuses" EntityType="OnlineStoreModel.OrderStatus" />
+          <AssociationSet Name="FK_OrderItem_Order" Association="OnlineStoreModel.FK_OrderItem_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -200,6 +259,53 @@
             </Principal>
             <Dependent Role="CategoryProduct">
               <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderItems" Relationship="OnlineStoreModel.FK_OrderItem_Order" FromRole="Order" ToRole="OrderItem" />
+        </EntityType>
+        <EntityType Name="OrderItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Order" Relationship="OnlineStoreModel.FK_OrderItem_Order" FromRole="OrderItem" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sequence" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_OrderItem_Order">
+          <End Type="OnlineStoreModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="OnlineStoreModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -249,6 +355,42 @@
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="OnlineStoreModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItems">
+            <EntityTypeMapping TypeName="OnlineStoreModel.OrderItem">
+              <MappingFragment StoreEntitySet="OrderItem">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatuses">
+            <EntityTypeMapping TypeName="OnlineStoreModel.OrderStatus">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

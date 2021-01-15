@@ -30,6 +30,11 @@
                     <li>@Html.ActionLink("Производители", "GetShortName", "Manufacturer", new { shortName = string.Empty }, null)</li>
                     <li>@Html.ActionLink("Каталог", "GetShortName", "Product", new { shortname = string.Empty }, null)</li>
                     <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Корзина", "Index", "Cart", null)</li>
+                    @if (Request.IsAuthenticated && User.IsInRole(_21century.Constants.ROLE_ADMIN))
+                    {
+                        <li>@Html.ActionLink("Статусы заказа", "Index", "OrderStatus")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

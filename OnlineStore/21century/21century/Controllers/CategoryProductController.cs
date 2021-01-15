@@ -45,13 +45,13 @@ namespace _21century.Controllers
         // После перемещения вверх перенаправляем на страницу категории
         protected override ActionResult OnUp(CategoryProduct obj)
         {
-            return RedirectToAction("GetByShortName", "Category", new { shortname = obj.Category.ShortName });
+            return RedirectToAction("GetShortName", "Category", new { shortname = obj.Category.ShortName });
         }
 
         // После перемещения вних перенаправляем на страницу категории
         protected override ActionResult OnDown(CategoryProduct obj)
         {
-            return RedirectToAction("GetByShortName", "Category", new { shortname = obj.Category.ShortName });
+            return RedirectToAction("GetShortName", "Category", new { shortname = obj.Category.ShortName });
         }
 
         // Перенаправляем на страницу товара

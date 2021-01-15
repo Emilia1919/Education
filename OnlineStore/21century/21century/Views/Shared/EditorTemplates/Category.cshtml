@@ -2,14 +2,14 @@
 
 @Html.ValidationSummary()
 
-@Html.LabelFor(model => model.Name)
+    <span style="color:white">@Html.LabelFor(model => model.Name)</span>
 <br />
 @Html.EditorFor(model => model.Name)
 <span style="color:Red">@Html.ValidationMessageFor(model => model.Name)</span>
 <br />
 <br />
 
-@Html.LabelFor(model => model.ShortName)
+<span style="color:white">@Html.LabelFor(model => model.ShortName)</span>
 <br />
 @Html.EditorFor(model => model.ShortName)
 <span style="color:Red">@Html.ValidationMessageFor(model => model.ShortName)</span>

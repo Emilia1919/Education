@@ -64,7 +64,7 @@
     ViewBag.Title = _21century.Constants.TITLE;
 }
 
-<h2 style="color: #00CC33;  font-family: Impact, Helvetica, Arial, sans-serif;">КАТЕГОРИИ</h2>
+<h2 style="color: #00CC33">КАТЕГОРИИ</h2>
 @if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
 {
     <p>@Html.ActionLink("Создать категорию", "Create", "Category")</p>
