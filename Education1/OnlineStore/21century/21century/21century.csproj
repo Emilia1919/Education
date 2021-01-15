@@ -165,6 +165,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CategoryProductController.cs" />
+    <Compile Include="Controllers\ContentManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />
@@ -182,6 +183,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryProductPartial.cs" />
+    <Compile Include="Models\ContentManager.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Interface\IBase.cs" />
     <Compile Include="Models\Interface\IOrdered.cs" />
@@ -370,6 +372,8 @@
     <Content Include="Views\Cart\ThankYou.cshtml" />
     <Content Include="Views\Personal\Index.cshtml" />
     <Content Include="Views\Personal\Edit.cshtml" />
+    <Content Include="Views\ContentManager\Index.cshtml" />
+    <Content Include="Views\ContentManager\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
