@@ -22,21 +22,19 @@
     public string RowProducts(ref int index)
     {
         string strResult = "<tr>";
-        
-        for(int innerIndex=0; innerIndex<_21century.Constants.PRODUCT_NUMBER_IN_ROW; innerIndex++)
+
+        for(int innerIndex=0; innerIndex<10; innerIndex++)
         {
             strResult += "<td style='text-align:center; padding-bottom:20px;'>";
-            
+
             if(index < Model.CategoryProducts.Count())
             {
                 var obj = Model.CategoryProducts.OrderByDescending(item => item.Sequence).Skip(index).Take(1).First();
-                string strImage = "0.jpg";
-                if(!string.IsNullOrWhiteSpace(obj.Product.ImageExt)) { strImage = obj.Product.ID.ToString() + obj.Product.ImageExt.TrimEnd() + "?" + DateTime.Now.ToString(); }
-                strResult += string.Format("<a href='{0}'><img src='{1}/{2}/{3}/{4}' alt='{5}' /></a>", Url.Action("GetProductInCategory", "Product", new { category = obj.Category.ShortName, product = obj.Product.ShortName }), Url.Content("~/Content"), _21century.Constants.PRODUCT_IMAGES_FOLDER, _21century.Constants.PRODUCT_IMAGES_MINI_FOLDER, strImage, obj.Product.Name);
+
                 strResult += "<br />";
- 
+
                 strResult += Html.ActionLink(obj.Product.Name, "GetProductInCategory", "Product", new { category = obj.Category.ShortName, product = obj.Product.ShortName }, null);
-                
+
                 if(Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN)||User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
                 {
                     strResult += "<br />";
@@ -45,14 +43,14 @@
                     strResult += Html.ActionLink("Вниз ->", "Down", "CategoryProduct", new { id = obj.ID }, null);
                 }
             }
- 
+
             strResult += "</td>";
- 
+
             index = index + 1;
         }
- 
+
         strResult += "</tr>";
- 
+
         return strResult;
     }
 }

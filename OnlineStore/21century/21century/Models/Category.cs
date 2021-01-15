@@ -24,7 +24,6 @@ namespace _21century.Models
         public string Name { get; set; }
         public string ShortName { get; set; }
         public Nullable<int> Sequence { get; set; }
-        public int CategoryProductID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CategoryProduct> CategoryProducts { get; set; }

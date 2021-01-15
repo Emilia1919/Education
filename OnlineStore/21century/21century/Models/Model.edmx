@@ -45,6 +45,30 @@
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ManufacturerID" Type="int" />
         </EntityType>
+        <Association Name="FK_CategoryProduct_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="CategoryProduct" Type="Self.CategoryProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CategoryProduct">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="CategoryProduct" Type="Self.CategoryProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CategoryProduct">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Manufacturer">
           <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -62,6 +86,14 @@
           <EntitySet Name="CategoryProduct" EntityType="Self.CategoryProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CategoryProduct_Category" Association="Self.FK_CategoryProduct_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryProduct" EntitySet="CategoryProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryProduct_Product" Association="Self.FK_CategoryProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CategoryProduct" EntitySet="CategoryProduct" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_Manufacturer" Association="Self.FK_Product_Manufacturer">
             <End Role="Manufacturer" EntitySet="Manufacturer" />
             <End Role="Product" EntitySet="Product" />
@@ -94,8 +126,7 @@
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ManufacturerID" Type="Int32" />
           <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
-          <Property Name="CategoryProductID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CategoryProducts" Relationship="OnlineStoreModel.CategoryProductProduct" FromRole="Product" ToRole="CategoryProduct" />
+          <NavigationProperty Name="CategoryProducts" Relationship="OnlineStoreModel.FK_CategoryProduct_Product" FromRole="Product" ToRole="CategoryProduct" />
         </EntityType>
         <Association Name="FK_Product_Manufacturer">
           <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
@@ -118,13 +149,13 @@
           </AssociationSet>
           <EntitySet Name="Categories" EntityType="OnlineStoreModel.Category" />
           <EntitySet Name="CategoryProducts" EntityType="OnlineStoreModel.CategoryProduct" />
-          <AssociationSet Name="CategoryProductCategory" Association="OnlineStoreModel.CategoryProductCategory">
-            <End Role="CategoryProduct" EntitySet="CategoryProducts" />
+          <AssociationSet Name="FK_CategoryProduct_Category" Association="OnlineStoreModel.FK_CategoryProduct_Category">
             <End Role="Category" EntitySet="Categories" />
-          </AssociationSet>
-          <AssociationSet Name="CategoryProductProduct" Association="OnlineStoreModel.CategoryProductProduct">
             <End Role="CategoryProduct" EntitySet="CategoryProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryProduct_Product" Association="OnlineStoreModel.FK_CategoryProduct_Product">
             <End Role="Product" EntitySet="Products" />
+            <End Role="CategoryProduct" EntitySet="CategoryProducts" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Category">
@@ -135,8 +166,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Sequence" Type="Int32" />
-          <Property Name="CategoryProductID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CategoryProducts" Relationship="OnlineStoreModel.CategoryProductCategory" FromRole="Category" ToRole="CategoryProduct" />
+          <NavigationProperty Name="CategoryProducts" Relationship="OnlineStoreModel.FK_CategoryProduct_Category" FromRole="Category" ToRole="CategoryProduct" />
         </EntityType>
         <EntityType Name="CategoryProduct">
           <Key>
@@ -146,16 +176,32 @@
           <Property Name="CategoryID" Type="Int32" />
           <Property Name="ProductID" Type="Int32" />
           <Property Name="Sequence" Type="Int32" />
-          <NavigationProperty Name="Category" Relationship="OnlineStoreModel.CategoryProductCategory" FromRole="CategoryProduct" ToRole="Category" />
-          <NavigationProperty Name="Product" Relationship="OnlineStoreModel.CategoryProductProduct" FromRole="CategoryProduct" ToRole="Product" />
+          <NavigationProperty Name="Category" Relationship="OnlineStoreModel.FK_CategoryProduct_Category" FromRole="CategoryProduct" ToRole="Category" />
+          <NavigationProperty Name="Product" Relationship="OnlineStoreModel.FK_CategoryProduct_Product" FromRole="CategoryProduct" ToRole="Product" />
         </EntityType>
-        <Association Name="CategoryProductCategory">
+        <Association Name="FK_CategoryProduct_Category">
+          <End Type="OnlineStoreModel.Category" Role="Category" Multiplicity="0..1" />
           <End Type="OnlineStoreModel.CategoryProduct" Role="CategoryProduct" Multiplicity="*" />
-          <End Type="OnlineStoreModel.Category" Role="Category" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CategoryProduct">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-        <Association Name="CategoryProductProduct">
+        <Association Name="FK_CategoryProduct_Product">
+          <End Type="OnlineStoreModel.Product" Role="Product" Multiplicity="0..1" />
           <End Type="OnlineStoreModel.CategoryProduct" Role="CategoryProduct" Multiplicity="*" />
-          <End Type="OnlineStoreModel.Product" Role="Product" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CategoryProduct">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>

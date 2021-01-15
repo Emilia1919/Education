@@ -10,8 +10,8 @@
         <AssociationConnector Association="OnlineStoreModel.FK_Product_Manufacturer" ManuallyRouted="false" />
         <EntityTypeShape EntityType="OnlineStoreModel.Category" Width="1.5" PointX="7" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineStoreModel.CategoryProduct" Width="1.5" PointX="4.875" PointY="0.875" />
-        <AssociationConnector Association="OnlineStoreModel.CategoryProductCategory" />
-        <AssociationConnector Association="OnlineStoreModel.CategoryProductProduct" />
+        <AssociationConnector Association="OnlineStoreModel.FK_CategoryProduct_Category" />
+        <AssociationConnector Association="OnlineStoreModel.FK_CategoryProduct_Product" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

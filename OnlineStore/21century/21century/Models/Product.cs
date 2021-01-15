@@ -27,7 +27,6 @@ namespace _21century.Models
         public string Description { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<int> ManufacturerID { get; set; }
-        public int CategoryProductID { get; set; }
     
         public virtual Manufacturer Manufacturer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

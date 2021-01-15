@@ -57,13 +57,14 @@
     </div>
 </div>
 
-
+<hr />
 @model IEnumerable<_21century.Models.Category>
 
 @{
     ViewBag.Title = _21century.Constants.TITLE;
 }
 
+<h2 style="color: #00CC33;  font-family: Impact, Helvetica, Arial, sans-serif;">КАТЕГОРИИ</h2>
 @if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
 {
     <p>@Html.ActionLink("Создать категорию", "Create", "Category")</p>
@@ -72,12 +73,11 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.ActionLink(item.Name, "GetShortName", "Category", new { shortname = item.ShortName }, null)</td>
+            <td><h4>@Html.ActionLink(item.Name, "GetShortName", "Category", new { shortname = item.ShortName }, new { @style = "color: #ffffff;" })</h4></td>
             @if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
             {
-                <td style="padding-left:30px">@Html.ActionLink("Вверх", "Up", "Category", new { id = item.ID }, null)</td>
-                <td style="padding-left:30px">@Html.ActionLink("Вниз", "Down", "Category", new { id = item.ID }, null)</td>
-            }
-        </tr>
+        <td style="padding-left:30px">@Html.ActionLink("Вверх", "Up", "Category", new { id = item.ID }, new { @style = "color: #b200ff;" })</td>
+        <td style="padding-left:30px">@Html.ActionLink("Вниз", "Down", "Category", new { id = item.ID }, new { @style = "color: #ff6a00;" })</td>
+            }        </tr>
     }
 </table>
