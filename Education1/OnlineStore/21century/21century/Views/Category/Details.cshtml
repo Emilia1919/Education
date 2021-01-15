@@ -1,0 +1,65 @@
+﻿@model _21century.Models.Category
+
+@{
+    ViewBag.Title = string.Format("{0} | {1}", Model.Name, _21century.Constants.TITLE);
+}
+
+<p>
+    @Html.ActionLink("На главную", "Index", "Home", new { @style = "color: #808080;" })
+    @_21century.Constants.BREADCRUMBS_SEPARATOR
+    @Model.Name
+</p>
+
+<h2 style="color: #ffffff">@Model.Name</h2>
+
+@if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
+{
+    <p>@Html.ActionLink("Редактировать", "Edit", new { id = Model.ID })&nbsp;&nbsp;&nbsp;@Html.ActionLink("Удалить", "Delete", new { id = Model.ID })</p>
+}
+
+@functions
+{
+    public string RowProducts(ref int index)
+    {
+        string strResult = "<tr>";
+
+        for(int innerIndex=0; innerIndex<10; innerIndex++)
+        {
+            strResult += "<td style='text-align:left; padding-bottom:30px'>";
+
+            if(index < Model.CategoryProducts.Count())
+            {
+                var obj = Model.CategoryProducts.OrderByDescending(item => item.Sequence).Skip(index).Take(1).First();
+
+                strResult += Html.ActionLink(obj.Product.Name, "GetProductInCategory", "Product", new { category = obj.Category.ShortName, product = obj.Product.ShortName }, new { @style = "color: #ffffff;" });
+
+                if(Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN)||User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
+                {
+                    strResult += Html.ActionLink(" Вверх", "Up", "CategoryProduct", new { id = obj.ID }, new { @style = "color: #b200ff;" });
+                    strResult += "&nbsp;&nbsp;&nbsp;";
+                    strResult += Html.ActionLink("Вниз ", "Down", "CategoryProduct", new { id = obj.ID }, new { @style = "color: #ff6a00;" });
+                }
+            }
+
+            strResult += "</td>";
+
+            index = index + 1;
+        }
+
+        strResult += "</tr>";
+
+        return strResult;
+    }
+}
+
+<table style="width:100%">
+    @{
+        int iCategoryProductsCount = Model.CategoryProducts.Count;
+        int iCategoryProductIndex = 0;
+
+        while (iCategoryProductIndex < iCategoryProductsCount)
+        {
+            @MvcHtmlString.Create(RowProducts(ref iCategoryProductIndex))
+        }
+    }
+</table>

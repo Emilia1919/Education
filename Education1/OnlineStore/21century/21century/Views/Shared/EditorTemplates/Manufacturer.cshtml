@@ -1,0 +1,23 @@
+﻿@model _21century.Models.Manufacturer
+
+@Html.ValidationSummary()
+
+    <span style="color:white">@Html.LabelFor(model => model.Name)</span>
+    <br />
+    @Html.EditorFor(model => model.Name)
+    <span style="color:red">@Html.ValidationMessageFor(model => model.Name)</span>
+    <br />
+    <br />
+
+    <span style="color:white">@Html.LabelFor(model => model.ShortName)</span>
+    <br />
+    @Html.EditorFor(model => model.ShortName)
+    <span style="color:red">@Html.ValidationMessageFor(model => model.ShortName)</span>
+    <br /><br />
+
+    <span style="color:white">@Html.LabelFor(model => model.Description)</span>
+    <br />
+    @Html.TextAreaFor(model => model.Description, new { cols = 70, rows = 5 })
+    <span style="color:red">@Html.ValidationMessageFor(model => model.Description)</span>
+    <br />
+    <br />

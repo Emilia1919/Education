@@ -1,0 +1,15 @@
+﻿@model _21century.Models.Product
+
+@{
+    ViewBag.Title = string.Format("Создание товара | {0}", _21century.Constants.TITLE);
+}
+
+<p>@Html.ActionLink("Отмена", "GetShortName", new { shortname = string.Empty }, new {@style="color: #808080;" })</p>
+<h2 style="color: #b200ff; padding-bottom: 15px">Создание товара</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+
+    <button type="submit" class="btn btn-warning">Создать</button>
+}

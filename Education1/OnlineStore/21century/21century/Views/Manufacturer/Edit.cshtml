@@ -1,0 +1,15 @@
+﻿@model _21century.Models.Manufacturer
+
+@{
+    ViewBag.Title = string.Format("Редактирование производителя | {0}", _21century.Constants.TITLE);
+}
+
+<p>@Html.ActionLink("Отмена", "GetShortName", new { shortName = Model.ShortName }, new {@style="color: #847f7f;" })</p>
+<h2 style="color: #b200ff; padding-bottom: 15px">Редактирование производителя</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+
+    <button type="submit" class="btn btn-warning">Сохранить</button>
+}

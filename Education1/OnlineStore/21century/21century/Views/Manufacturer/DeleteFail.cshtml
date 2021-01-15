@@ -1,0 +1,20 @@
+﻿@model _21century.Models.Manufacturer
+
+@{ 
+    ViewBag.Title = "Удаление невозможно";
+}
+
+        <p>@Html.ActionLink("К списку", "GetShortName", new { shortName = string.Empty }, new {@style="color: #808080;" })</p>
+        <h2 style="color: #ffffff">Удаление невозможно</h2>
+        <span style="color:red">Сначала удалите товары, ссылающиеся на этого производителя</span>
+
+
+@if (Model != null && Model.Products.Count > 0)
+{
+    <ul>
+        @foreach(var item in Model.Products)
+        {
+            <li style="padding-top: 30px">@Html.ActionLink(item.Name, "GetShortName", new { shortName = item.ShortName }, null)</li>
+        }
+    </ul>
+}

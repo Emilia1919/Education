@@ -1,0 +1,17 @@
+﻿@model _21century.Models.Manufacturer
+
+@{
+    ViewBag.Title = string.Format("Удаление производителя | {0}", _21century.Constants.TITLE);
+}
+
+<p>@Html.ActionLink("Отмена", "GetShortName", new { shortName = Model.ShortName }, new {@style="color: #808080;" })</p>
+<h3 style="color:red; padding-bottom: 15px">Вы уверены, что хотите удалить этого производителя?</h3>
+
+<h2 style="font-weight:bold; color: #ffffff">@Model.Name</h2>
+<p style="color: #ffffff">@Model.Description</p>
+
+
+@using (Html.BeginForm())
+{
+    <button type="submit" class="btn btn-danger">Удалить</button>
+}

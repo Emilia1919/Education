@@ -1,0 +1,42 @@
+﻿@model _21century.Models.Product
+
+@Html.ValidationSummary()
+
+<span style="color:white">@Html.LabelFor(model => model.Name)</span>
+<br />
+@Html.EditorFor(model => model.Name)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Name)</span>
+<br />
+<br />
+
+<span style="color:white">@Html.LabelFor(model => model.ShortName)</span>
+<br />
+@Html.EditorFor(model => model.ShortName)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.ShortName)</span>
+<br />
+<br />
+
+<span style="color:white">@Html.LabelFor(model => model.Price)</span>
+<br />
+@Html.EditorFor(model => model.Price)
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Price)</span>
+<br />
+<br />
+
+<span style="color:white">@Html.LabelFor(model => model.ManufacturerID)</span>
+<br />
+@{
+    var queryManufacturers = (_21century.Service.Factory.ManufacturerServiceFactory.Create()).Get().Select(item => new { ID = item.ID, Name = item.Name }).ToList();
+    var listManufacturers = queryManufacturers.Select(item => new SelectListItem() { Text = item.Name, Value = item.ID.ToString(), Selected = (Model != null && Model.ManufacturerID.Value == item.ID) }).ToList();
+    @Html.DropDownListFor(model => model.ManufacturerID, listManufacturers, "...")
+}
+<span style="color:Red">@Html.ValidationMessageFor(model => model.ManufacturerID)</span>
+<br />
+<br />
+
+<span style="color:white">@Html.LabelFor(model => model.Description)</span>
+<br />
+@Html.TextAreaFor(model => model.Description, new { cols = 70, rows = 5 })
+<span style="color:Red">@Html.ValidationMessageFor(model => model.Description)</span>
+<br />
+<br />

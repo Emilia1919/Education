@@ -1,0 +1,38 @@
+﻿@model IEnumerable<_21century.Models.Product>
+
+
+@{
+    ViewBag.Title = string.Format("Товары | {0}", _21century.Constants.TITLE);
+}
+
+<p>
+    @Html.ActionLink("На главную", "Index", "Home", new { @style = "color: #808080;" })
+    @_21century.Constants.BREADCRUMBS_SEPARATOR
+    Товары
+</p>
+    <h2 style="color: #ffffff">Товары</h2>
+    @if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
+    {
+        <p>@Html.ActionLink("Создать", "Create")</p>
+    }
+
+    <table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(item.Name, "GetShortName", new { shortname = item.ShortName }, new { @style = "color: #ffffff;" })</td>
+                @if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
+                {
+                    <td style="padding-left:30px">@Html.ActionLink("Вверх", "Up", new { id = item.ID }, new { @style = "color: #b200ff;" })</td>
+                    <td style="padding-left:30px">@Html.ActionLink("Вниз", "Down", new { id = item.ID }, new { @style = "color: #ff6a00;" })</td>
+                }
+            </tr>
+        }
+    </table>
+
+    <br />
+    <br />
+
+    <div class="pager">
+        @Html.Partial("_Pager", (new _21century.Pager(Request.QueryString["page"], _21century.Service.Factory.ProductServiceFactory.Create().Get().Count(), Request.QueryString)).Links)
+    </div>

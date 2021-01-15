@@ -1,0 +1,81 @@
+﻿@model _21century.Models.Product
+
+@{
+    ViewBag.Title = string.Format("{0} | Товары | {1}", Model.Name, _21century.Constants.TITLE);
+}
+
+<p>
+    @{
+        List<string> path = _21century.Helper.GetUrlPath(Request);
+
+        if (path.Count == 2)
+        {
+            @Html.ActionLink("На главную", "Index", "Home", new { @style = "color: #808080;" })
+            @_21century.Constants.BREADCRUMBS_SEPARATOR
+            @Html.ActionLink("Товары", "GetShortName", new { shortname = string.Empty }, new { @style = "color: #808080;" })
+            @_21century.Constants.BREADCRUMBS_SEPARATOR
+            @Model.Name
+        }
+        else if (_21century.Helper.GetUrlPath(Request).Count == 3)
+        {
+            @Html.ActionLink("На главную", "Index", "Home")
+            @_21century.Constants.BREADCRUMBS_SEPARATOR
+            @Html.ActionLink("Производители", "GetShortName", "Manufacturer", new { shortname = string.Empty }, null)
+            @_21century.Constants.BREADCRUMBS_SEPARATOR
+            @Html.ActionLink(_21century.Service.Factory.ManufacturerServiceFactory.Create().Get(path[1]).Name, "GetShortName", "Manufacturer", new { shortname = path[1] }, null)
+            @_21century.Constants.BREADCRUMBS_SEPARATOR
+            @Model.Name
+        }
+        else if (path.Count == 4 && path[0] == "catalog" && path[2] == "products")
+        {
+            _21century.Models.Category category = Model.CategoryProducts.Where(item => item.Category.ShortName == path[1]).Select(item => item.Category).FirstOrDefault();
+
+            @Html.ActionLink("На главную", "Index", "Home")
+            @_21century.Constants.BREADCRUMBS_SEPARATOR
+
+            if (category != null)
+            {
+                @Html.ActionLink(category.Name, "GetShortName", "Category", new { shortname = category.ShortName }, null)
+                @_21century.Constants.BREADCRUMBS_SEPARATOR
+            }
+
+            @Model.Name
+        }
+    }
+</p>
+
+<p>@Html.ActionLink("Редактировать", "Edit", new { id = Model.ID, page = Request.QueryString["page"] })&nbsp;&nbsp;&nbsp;@Html.ActionLink("Удалить", "Delete", new { id = Model.ID })</p>
+<h2 style="color: #ffffff">@Model.Name</h2>
+<p style="color: #ffd800"><span style="font-weight:bold; color: #ffffff">Цена: </span>@Model.Price руб.</p>
+<p style="color: #ffd800"><span style="font-weight:bold; color: #ffffff">Производитель: </span>@Model.Manufacturer.Name</p>
+<p style="color: #ffffff">@Model.Description</p>
+
+<h3 style="color: #ffffff">Категория</h3>
+
+@if (Model.CategoryProducts.Count > 0)
+{
+    <table>
+        @foreach (var item in Model.CategoryProducts.OrderBy(item => item.Category.Name))
+        {
+            <tr>
+                <td style="color: #ffd800">@item.Category.Name</td>
+                <td style="padding-left:20px">@Html.ActionLink("Удалить", "DeleteExpress", "CategoryProduct", new { id = item.ID }, new { onclick = "javascript:return confirm('Вы уверены?');" })</td>
+            </tr>
+        }
+    </table>
+}
+
+<p>@Html.ActionLink("В корзину", "Add", "Cart", new { id = Model.ID }, null)</p>
+
+<h5 style="color: #ffffff">Добавить категорию</h5>
+
+@using (Html.BeginForm("Add", "CategoryProduct", FormMethod.Post))
+{
+    @Html.Hidden("ProductID", Model.ID)
+
+    var queryCategories = (_21century.Service.Factory.CategoryServiceFactory.Create()).Get().Select(item => new { ID = item.ID, Name = item.Name }).ToList();
+    var listCategories = queryCategories.Select(item => new SelectListItem() { Text = item.Name, Value = item.ID.ToString(), Selected = false }).ToList();
+    @Html.DropDownList("CategoryID", listCategories, "...")
+
+    <button type="submit" class="btn btn-primary">   Добавить</button>
+}

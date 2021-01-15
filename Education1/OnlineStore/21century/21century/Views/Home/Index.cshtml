@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Facad Standart";
+}
+
+<div class="jumbotron" style="background: none;">
+    <h1 style="color:#ffffff; font-family: Impact, Helvetica, Arial, sans-serif;">Facad Stand <text style="color:#00CC33">Art</text></h1>
+    <p class="lead" style="color:#ffffff">Мы рады сообщить Вам об открытии нового шоу-рума плитных материалов и фасадов, который находится на 1 этаже здания Westline – одного из самых известных поставщиков европейской фурнитуры.</p>
+</div>
+
+<div style="padding-bottom: 80px">
+    <img src="Image/slide1.jpg" width="568px" height="350px">
+    <img src="Image/slide2.png" width="568px" height="350px">
+</div>
+
+<div style="background: #808080; text-align:center; padding-top: 1px; padding-bottom: 1px; opacity: 0.9">
+    <h3 style="font-family: Arial, Helvetica, Arial, sans-serif; color: #333333">КАК ПОЛУЧИТЬ НЕОБХОДИМЫЕ ВАМ ФАСАДЫ ДЛЯ КУХНИ, С ДОСТАВКОЙ?</h3>
+</div>
+
+<div class="row" style="padding: 10px; color:#ffffff">
+    <div class="col-md-3">
+        <h2 style="text-align:center; color: #ffd800">Шаг 1 - Регистрация</h2>
+        <ul>
+            <li>Заполните форму регистрации</li>
+            <li>Подтвердите регистрацию через email</li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2 style=" text-align:center; color: #b200ff">Шаг 2 - Заполните личные данные</h2>
+        <ul>
+            <li>Укажите ФИО и номер телефона</li>
+            <li>Если Вы Юр. лицо - укажите реквизиты, для безналичной оплаты</li>
+            <li>Так же добавьте один или более адресов для доставки</li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2 style=" text-align:center; color: #00CC33">Шаг 3 - Воспользуйтесь конфигуратором</h2>
+        <p>Подберите необходимую расцветку и тип материала фасадов через конфигуратор кухни.</p>
+    </div>
+
+    <div class="col-md-3">
+        <h2 style=" text-align:center; color: #ff006e">Шаг 4 - Соберите свой фасад</h2>
+        <p>Выберете один из четырех типов фасад (простой, витрина, радиусный или склейка). Задайте нужные вам размеры и материал, а так же Вы можете указать дополнительные опции такие как, пропилы, петли, ручки и др.</p>
+    </div>
+
+    <div class="col-md-3">
+        <h2 style=" text-align:center; color: #0094ff">Шаг 5 - Оплатите заказ удобным для вас способом</h2>
+        <ul>
+            <li>Наличными</li>
+            <li>Оплата с карточки, online</li>
+            <li>Оплата безналом.(для юр. лиц)</li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2 style=" text-align:center; color: #ff0000">Шаг 6 - Получите заказ</h2>
+        <!--<img src="Image/truck.png" width="48px" height="48px">-->
+        <p>Мы доставим его по указанаму Вами адресу, Вам остается лишь получить его.</p>
+    </div>
+</div>
+
+<hr />
+@model IEnumerable<_21century.Models.Category>
+
+@{
+    ViewBag.Title = _21century.Constants.TITLE;
+}
+
+<h2 style="color: #00CC33">КАТЕГОРИИ</h2>
+@if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
+{
+    <p>@Html.ActionLink("Создать категорию", "Create", "Category")</p>
+}
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td><h4>@Html.ActionLink(item.Name, "GetShortName", "Category", new { shortname = item.ShortName }, new { @style = "color: #ffffff;" })</h4></td>
+            @if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
+            {
+        <td style="padding-left:30px">@Html.ActionLink("Вверх", "Up", "Category", new { id = item.ID }, new { @style = "color: #b200ff;" })</td>
+        <td style="padding-left:30px">@Html.ActionLink("Вниз", "Down", "Category", new { id = item.ID }, new { @style = "color: #ff6a00;" })</td>
+            }        </tr>
+    }
+</table>
