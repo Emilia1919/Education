@@ -12,6 +12,26 @@ namespace _21century.Controllers
 {
     public class ProductController : UrlFriendlyController<Product>
     {
+        public ActionResult Index()
+        {
+            UserProfile profile = new UserProfile(User.Identity.Name);
+            return View(profile);
+        }
+
+        public ActionResult Edit()
+        {
+            UserProfile profile = new UserProfile(User.Identity.Name);
+            return View(profile);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(FormCollection collection)
+        {
+            UserProfile profile = new UserProfile(User.Identity.Name);
+            UpdateModel(profile, collection);
+            profile.Save();
+            return RedirectToAction("Index");
+        }
         public ProductController(IUrlFriendlyService<Product> _service) : base(_service) { }
         public ProductController() : this(ProductServiceFactory.Create()) { }
 

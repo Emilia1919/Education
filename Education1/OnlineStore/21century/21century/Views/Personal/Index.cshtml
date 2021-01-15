@@ -1,0 +1,31 @@
+﻿@model _21century.Models.UserProfile
+
+@{
+    ViewBag.Title = string.Format("Личная страница | {0}", _21century.Constants.TITLE);
+}
+
+<p>
+    @Html.ActionLink("На главную", "Index", "Home")
+    @_21century.Constants.BREADCRUMBS_SEPARATOR
+    Личная страница
+</p>
+
+<h2>Личная страница</h2>
+
+<p>@Html.ActionLink("Сменить пароль", "ChangePassword", "Account")</p>
+<p>@Html.ActionLink("Редактировать", "Edit")</p>
+
+<table>
+    <tr>
+        <td>Имя</td>
+        <td style="font-weight:bold">@Model.FirstName</td>
+    </tr>
+    <tr>
+        <td>Отчество</td>
+        <td style="font-weight:bold">@Model.MiddleName</td>
+    </tr>
+    <tr>
+        <td>Фамилия</td>
+        <td style="font-weight:bold">@Model.LastName</td>
+    </tr>
+</table>

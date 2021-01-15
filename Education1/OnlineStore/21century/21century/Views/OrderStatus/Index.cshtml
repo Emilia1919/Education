@@ -5,12 +5,12 @@
 }
 
 <p>
-    @Html.ActionLink("На главную", "Index", "Home")
+    @Html.ActionLink("На главную", "Index", "Home",  new { @style = "color: #808080;" })
     @_21century.Constants.BREADCRUMBS_SEPARATOR
     Статусы заказа
 </p>
 
-<h2>Статусы заказа</h2>
+<h2 style="color: #ffffff">Статусы заказа</h2>
 
 <p>@Html.ActionLink("Создать", "Create")</p>
 
@@ -18,9 +18,9 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.ActionLink(item.Name, "Edit", new { id = item.ID })</td>
-            <td style="padding-left:30px">@Html.ActionLink("Вверх", "Up", new { id = item.ID })</td>
-            <td style="padding-left:30px">@Html.ActionLink("Вниз", "Down", new { id = item.ID })</td>
+            <td>@Html.ActionLink(item.Name, "Edit", new { id = item.ID }, new { @style = "color: #ffffff;" })</td>
+            <td style="padding-left:30px">@Html.ActionLink("Вверх", "Up", new { id = item.ID }, new { @style = "color: #b200ff;" })</td>
+            <td style="padding-left:30px">@Html.ActionLink("Вниз", "Down", new { id = item.ID }, new { @style = "color: #ff6a00;" })</td>
             <td style="padding-left:30px">@Html.ActionLink("Удалить", "DeleteExpress", new { id = item.ID }, new { onclick = "jav * ascript:return confirm('Вы уверены?')" })</td>
         </tr>
     }

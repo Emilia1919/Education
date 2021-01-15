@@ -4,45 +4,46 @@
     ViewBag.Title = string.Format("{0} | Товары | {1}", Model.Name, _21century.Constants.TITLE);
 }
 
-<p>
-    @{
-        List<string> path = _21century.Helper.GetUrlPath(Request);
+    <p>
+        @{
+            List<string> path = _21century.Helper.GetUrlPath(Request);
 
-        if (path.Count == 2)
-        {
-            @Html.ActionLink("На главную", "Index", "Home", new { @style = "color: #808080;" })
-            @_21century.Constants.BREADCRUMBS_SEPARATOR
-            @Html.ActionLink("Товары", "GetShortName", new { shortname = string.Empty }, new { @style = "color: #808080;" })
-            @_21century.Constants.BREADCRUMBS_SEPARATOR
-            @Model.Name
-        }
-        else if (_21century.Helper.GetUrlPath(Request).Count == 3)
-        {
-            @Html.ActionLink("На главную", "Index", "Home")
-            @_21century.Constants.BREADCRUMBS_SEPARATOR
-            @Html.ActionLink("Производители", "GetShortName", "Manufacturer", new { shortname = string.Empty }, null)
-            @_21century.Constants.BREADCRUMBS_SEPARATOR
-            @Html.ActionLink(_21century.Service.Factory.ManufacturerServiceFactory.Create().Get(path[1]).Name, "GetShortName", "Manufacturer", new { shortname = path[1] }, null)
-            @_21century.Constants.BREADCRUMBS_SEPARATOR
-            @Model.Name
-        }
-        else if (path.Count == 4 && path[0] == "catalog" && path[2] == "products")
-        {
-            _21century.Models.Category category = Model.CategoryProducts.Where(item => item.Category.ShortName == path[1]).Select(item => item.Category).FirstOrDefault();
-
-            @Html.ActionLink("На главную", "Index", "Home")
-            @_21century.Constants.BREADCRUMBS_SEPARATOR
-
-            if (category != null)
+            if (path.Count == 2)
             {
-                @Html.ActionLink(category.Name, "GetShortName", "Category", new { shortname = category.ShortName }, null)
+                @Html.ActionLink("На главную", "Index", "Home", new { @style = "color: #808080;" })
                 @_21century.Constants.BREADCRUMBS_SEPARATOR
+                @Html.ActionLink(string.IsNullOrWhiteSpace(Request.QueryString["find"]) ? "Товары" : "Результаты поиска", "GetShortName", new { shortname = string.Empty, page = Request.QueryString["page"], find = Request.QueryString["find"] })
+                @Html.ActionLink("Товары", "GetShortName", new { shortname = string.Empty }, new { @style = "color: #808080;" })
+                @_21century.Constants.BREADCRUMBS_SEPARATOR
+                @Model.Name
             }
+            else if (_21century.Helper.GetUrlPath(Request).Count == 3)
+            {
+                @Html.ActionLink("На главную", "Index", "Home")
+                @_21century.Constants.BREADCRUMBS_SEPARATOR
+                @Html.ActionLink("Производители", "GetShortName", "Manufacturer", new { shortname = string.Empty }, null)
+                @_21century.Constants.BREADCRUMBS_SEPARATOR
+                @Html.ActionLink(_21century.Service.Factory.ManufacturerServiceFactory.Create().Get(path[1]).Name, "GetShortName", "Manufacturer", new { shortname = path[1] }, null)
+                @_21century.Constants.BREADCRUMBS_SEPARATOR
+                @Model.Name
+            }
+            else if (path.Count == 4 && path[0] == "catalog" && path[2] == "products")
+            {
+                _21century.Models.Category category = Model.CategoryProducts.Where(item => item.Category.ShortName == path[1]).Select(item => item.Category).FirstOrDefault();
 
-            @Model.Name
+                @Html.ActionLink("На главную", "Index", "Home")
+                @_21century.Constants.BREADCRUMBS_SEPARATOR
+
+                if (category != null)
+                {
+                    @Html.ActionLink(category.Name, "GetShortName", "Category", new { shortname = category.ShortName }, null)
+                    @_21century.Constants.BREADCRUMBS_SEPARATOR
+                }
+
+                @Model.Name
+            }
         }
-    }
-</p>
+    </p>
 
 <p>@Html.ActionLink("Редактировать", "Edit", new { id = Model.ID, page = Request.QueryString["page"] })&nbsp;&nbsp;&nbsp;@Html.ActionLink("Удалить", "Delete", new { id = Model.ID })</p>
 <h2 style="color: #ffffff">@Model.Name</h2>

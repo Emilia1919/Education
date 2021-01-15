@@ -1,0 +1,31 @@
+﻿@model _21century.Models.UserProfile
+
+@{
+    ViewBag.Title = "Редактирование личных данных";
+}
+
+<p>@Html.ActionLink("Отмена", "Index")</p>
+<h2>Редактирование личных данных</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.FirstName)
+    <br />
+    @Html.EditorFor(model => model.FirstName)
+    <br />
+    <br />
+
+    @Html.LabelFor(model => model.MiddleName)
+    <br />
+    @Html.EditorFor(model => model.MiddleName)
+    <br />
+    <br />
+
+    @Html.LabelFor(model => model.LastName)
+    <br />
+    @Html.EditorFor(model => model.LastName)
+    <br />
+    <br />
+
+    <input type="submit" value="Сохранить" />
+}

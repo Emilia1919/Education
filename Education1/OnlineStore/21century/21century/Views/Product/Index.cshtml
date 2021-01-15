@@ -10,29 +10,71 @@
     @_21century.Constants.BREADCRUMBS_SEPARATOR
     Товары
 </p>
-    <h2 style="color: #ffffff">Товары</h2>
-    @if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
+
+<h2 style="color: #ffffff">Товары</h2>
+@if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
+{
+    <p>@Html.ActionLink("Создать", "Create")</p>
+}
+
+@functions
+{
+    public string RowProduct(ref int index)
     {
-        <p>@Html.ActionLink("Создать", "Create")</p>
-    }
+        string strResult = "<tr>";
 
-    <table>
-        @foreach (var item in Model)
+        for (int innerIndex = 0; innerIndex < 10; innerIndex++)
         {
-            <tr>
-                <td>@Html.ActionLink(item.Name, "GetShortName", new { shortname = item.ShortName }, new { @style = "color: #ffffff;" })</td>
-                @if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
-                {
-                    <td style="padding-left:30px">@Html.ActionLink("Вверх", "Up", new { id = item.ID }, new { @style = "color: #b200ff;" })</td>
-                    <td style="padding-left:30px">@Html.ActionLink("Вниз", "Down", new { id = item.ID }, new { @style = "color: #ff6a00;" })</td>
-                }
-            </tr>
+            strResult += "<td style='text-align:center; padding-bottom:20px;'>";
+
+            if (index < Model.Count())
+            {
+                var obj = Model.Skip(index).Take(1).First();
+
+
+               
+            }
+
+            strResult += "</td>";
+
+            index = index + 1;
         }
-    </table>
 
-    <br />
-    <br />
+        strResult += "</tr>";
 
-    <div class="pager">
-        @Html.Partial("_Pager", (new _21century.Pager(Request.QueryString["page"], _21century.Service.Factory.ProductServiceFactory.Create().Get().Count(), Request.QueryString)).Links)
-    </div>
+        return strResult;
+    }
+}
+
+<table style="width:100%">
+    @{
+        int iProductCount = Model.Count();
+        int iProductIndex = 0;
+
+        while (iProductIndex < iProductCount)
+        {
+            @MvcHtmlString.Create(RowProduct(ref iProductIndex))
+        }
+    }
+</table>
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(item.Name, "GetShortName", new { shortname = item.ShortName }, new { @style = "color: #ffffff;" })</td>
+            @if (Request.IsAuthenticated && (User.IsInRole(_21century.Constants.ROLE_ADMIN) || User.IsInRole(_21century.Constants.ROLE_CONTENT_MANAGER)))
+            {
+                <td style="padding-left:30px">@Html.ActionLink("Вверх", "Up", new { id = item.ID }, new { @style = "color: #b200ff;" })</td>
+                <td style="padding-left:30px">@Html.ActionLink("Вниз", "Down", new { id = item.ID }, new { @style = "color: #ff6a00;" })</td>
+            }
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+
+<div class="pager">
+    @Html.Partial("_Pager", (new _21century.Pager(Request.QueryString["page"], _21century.Service.Factory.ProductServiceFactory.Create().Count(Request.QueryString), Request.QueryString)).Links)
+</div>

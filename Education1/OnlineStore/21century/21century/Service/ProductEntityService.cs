@@ -17,5 +17,18 @@ namespace _21century.Service
         {
             entities.SaveChanges();
         }
+
+        public override IQueryable<Product> Get(System.Collections.Specialized.NameValueCollection filter)
+        {
+            IQueryable<Product> result = Get();
+
+            if (!string.IsNullOrWhiteSpace(filter["find"]))
+            {
+                string strFind = filter["find"].ToLower();
+                result = result.Where(item => item.Name != null && item.Name.Contains(strFind));
+            }
+
+            return result;
+        }
     }
 }
