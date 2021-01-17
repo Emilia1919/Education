@@ -25,7 +25,7 @@ namespace _21century.Controllers
         public ActionResult Edit(FormCollection collection)
         {
             UserProfile profile = new UserProfile(User.Identity.Name);
-            UpdateModel(profile, collection);
+           // UpdateModel(profile, collection);
             profile.Save();
             return RedirectToAction("Index");
         }

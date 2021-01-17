@@ -22,7 +22,7 @@ namespace _21century.Models
             get
             {
                 if (profile == null) return string.Empty;
-                else return profile[Constants.PROFILE_FIRST_NAME] as string;
+                else return string.Empty;
             }
             set { if (profile != null) { profile[Constants.PROFILE_FIRST_NAME] = value; } }
         }
@@ -33,7 +33,7 @@ namespace _21century.Models
             get
             {
                 if (profile == null) return string.Empty;
-                else return profile[Constants.PROFILE_MIDDLE_NAME] as string;
+                else return string.Empty;
             }
             set { if (profile != null) { profile[Constants.PROFILE_MIDDLE_NAME] = value; } }
         }
@@ -44,7 +44,7 @@ namespace _21century.Models
             get
             {
                 if (profile == null) return string.Empty;
-                else return profile[Constants.PROFILE_LAST_NAME] as string;
+                else return string.Empty;
             }
             set { if (profile != null) { profile[Constants.PROFILE_LAST_NAME] = value; } }
         }
