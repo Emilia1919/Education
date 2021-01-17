@@ -77,5 +77,10 @@ namespace Fasad_Standart
             review.Show();
             this.Hide();
         }
+
+        private void RadioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

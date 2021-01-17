@@ -58,6 +58,11 @@
     <Compile Include="Clientere.Designer.cs">
       <DependentUpon>Clientere.cs</DependentUpon>
     </Compile>
+    <Compile Include="fasad_standartDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>fasad_standartDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Help.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +100,24 @@
     </Compile>
     <Compile Include="Review.Designer.cs">
       <DependentUpon>Review.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelClients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelClients.Designer.cs">
+      <DependentUpon>SelClients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelPost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelPost.Designer.cs">
+      <DependentUpon>SelPost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelProducts.Designer.cs">
+      <DependentUpon>SelProducts.cs</DependentUpon>
     </Compile>
     <Compile Include="Staff.cs">
       <SubType>Form</SubType>
@@ -141,12 +164,32 @@
     <EmbeddedResource Include="Review.resx">
       <DependentUpon>Review.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SelClients.resx">
+      <DependentUpon>SelClients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelPost.resx">
+      <DependentUpon>SelPost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelProducts.resx">
+      <DependentUpon>SelProducts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Staff.resx">
       <DependentUpon>Staff.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Type.resx">
       <DependentUpon>Type.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="fasad_standartDataSet.xsc">
+      <DependentUpon>fasad_standartDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="fasad_standartDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>fasad_standartDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="fasad_standartDataSet.xss">
+      <DependentUpon>fasad_standartDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
