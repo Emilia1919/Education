@@ -4,24 +4,34 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using pittools.Models;
+using pittools.Service.Factory;
+using pittools.Service.Interface;
 
 namespace pittools.Controllers
 {
     public class ManufacturerController : Controller
     {
-        Entities entities = new Entities();
+        private IBaseService<Manufacturer> service;
+
+        public ManufacturerController(IBaseService<Manufacturer> _service)
+        {
+            service = _service;
+        }
+
+        public ManufacturerController() : this(ManufacturerServiceFactory.Create()) { }
+
 
         // Отображает список всех объектов
         public ActionResult Index()
         {
-            var objs = entities.Manufacturers;
+            var objs = service.Get();
             return View(objs);
         }
 
         // Отображает карточку объекта, имеющего ID, задаваемый в параметре id
         public ActionResult Details(int id)
         {
-            Manufacturer obj = (from item in entities.Manufacturers where item.ID == id select item).FirstOrDefault();
+            Manufacturer obj = service.Get(id);
             if (obj == null) return View("NotFound");
             return View(obj);
         }
@@ -41,8 +51,8 @@ namespace pittools.Controllers
             {
                 Manufacturer obj = new Manufacturer();
                 UpdateModel(obj, collection);
-                entities.Manufacturers.Add(obj);
-                entities.SaveChanges();
+                service.Add(obj);
+                service.Save();
                 return RedirectToAction("Details", new { id = obj.ID });
             }
             else return View();
@@ -51,7 +61,7 @@ namespace pittools.Controllers
         // Открывает форму редактирования объекта, имеющего ID, задаваемый в параметре id
         public ActionResult Edit(int id)
         {
-            Manufacturer obj = (from item in entities.Manufacturers where item.ID == id select item).FirstOrDefault();
+            Manufacturer obj = service.Get(id);
             if (obj == null) return View("NotFound");
             return View(obj);
         }
@@ -61,13 +71,13 @@ namespace pittools.Controllers
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            Manufacturer obj = (from item in entities.Manufacturers where item.ID == id select item).FirstOrDefault();
+            Manufacturer obj = service.Get(id);
             if (obj == null) return View("NotFound");
 
             if (ModelState.IsValid)
             {
                 UpdateModel(obj, collection);
-                entities.SaveChanges();
+                service.Save();
                 return RedirectToAction("Details", new { id = obj.ID });
             }
             else return View(obj);
@@ -76,7 +86,7 @@ namespace pittools.Controllers
         // Открывает форму для удаления объекта, имеющего ID, задаваемый в параметре id
         public ActionResult Delete(int id)
         {
-            Manufacturer obj = (from item in entities.Manufacturers where item.ID == id select item).FirstOrDefault();
+            Manufacturer obj = service.Get(id);
             if (obj == null) return View("NotFound");
             return View(obj);
         }
@@ -86,10 +96,10 @@ namespace pittools.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            Manufacturer obj = (from item in entities.Manufacturers where item.ID == id select item).FirstOrDefault();
+            Manufacturer obj = service.Get(id);
             if (obj == null) return View("NotFound");
-            entities.Manufacturers.Remove(obj);
-            entities.SaveChanges();
+            service.Delete(obj);
+            service.Save();
             return RedirectToAction("Index");
         }
     }

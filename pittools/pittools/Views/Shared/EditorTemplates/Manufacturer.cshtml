@@ -6,12 +6,10 @@
 <br />
 @Html.EditorFor(model => model.Name)
 <span style="color:Red">@Html.ValidationMessageFor(model => model.Name)</span>
-<br />
-<br />
+<br /> <br />
 
 @Html.LabelFor(model => model.Description)
 <br />
 @Html.TextAreaFor(model => model.Description, new { cols = 70, rows = 5 })
 <span style="color:Red">@Html.ValidationMessageFor(model => model.Description)</span>
-<br />
-<br />
+<br /> <br />

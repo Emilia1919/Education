@@ -194,6 +194,7 @@
       <DependentUpon>EntityDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Interface\IBase.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Manufacturer.cs">
       <DependentUpon>EntityDataModel.tt</DependentUpon>
@@ -201,6 +202,9 @@
     <Compile Include="Models\ManufacturerPartial.cs" />
     <Compile Include="Models\Metadata\ManufacturerMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Factory\ManufacturerServiceFactory.cs" />
+    <Compile Include="Service\Interface\IBaseService.cs" />
+    <Compile Include="Service\ManufacturerEntityService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
