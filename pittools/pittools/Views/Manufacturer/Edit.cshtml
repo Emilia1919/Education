@@ -1,0 +1,36 @@
+﻿@model pittools.Models.Manufacturer
+
+@{
+    ViewBag.Title = string.Format("Редактирование производителя | {0}", pittools.Constants.TITLE);
+}
+
+@section scripts{
+    <script scr="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script scr="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+}
+
+<p>@Html.ActionLink("Отмена", "Details", new { id = Model.ID })</p>
+<h2>Редактирование производителя</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+
+    <!-- @Html.ValidationSummary()
+
+        @Html.LabelFor(model => model.Name)
+        <br />
+        @Html.EditorFor(model => model.Name)
+        <span style="color:Red">@Html.ValidationMessageFor(model => model.Name)</span>
+        <br />
+        <br />
+
+        @Html.LabelFor(model => model.Description)
+        <br />
+        @Html.TextAreaFor(model => model.Description, new { cols = 70, rows = 5 })
+        <span style="color:Red">@Html.ValidationMessageFor(model => model.Description)</span>
+        <br />
+        <br />
+    -->
+    <input type="submit" value="Сохранить" />
+}
