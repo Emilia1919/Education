@@ -4,7 +4,7 @@
     ViewBag.Title = string.Format("Удаление производителя | {0}", pittools.Constants.TITLE);
 }
 
-<p>@Html.ActionLink("Отмена", "Details", new { id = Model.ID })</p>
+<p>@Html.ActionLink("Отмена", "GetByShortName", new { shortName = Model.ShortName })</p>
 <h3 style="color:Red">Вы уверены, что хотите удалить этого производителя?</h3>
 
 @using (Html.BeginForm())

@@ -17,5 +17,7 @@ namespace pittools.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public Nullable<int> Sequence { get; set; }
+        public string ShortName { get; set; }
     }
 }

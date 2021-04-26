@@ -10,12 +10,12 @@ using pittools.Models.Metadata;
 namespace pittools.Models
 {
     [MetadataType(typeof(ManufacturerMetadata))]
-    public partial class Manufacturer : IOrdered
+    public partial class Manufacturer : IUrlFriendly
     {
         public bool CanBeDeleted()
         {  
             return true;
         }
-        public int? Sequence { get; set; }
+        //public int? Sequence { get; set; } 
     }
 }
