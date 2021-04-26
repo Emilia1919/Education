@@ -10,9 +10,9 @@ using pittools.Service.Interface;
 
 namespace pittools.Controllers
 {
-    public class ManufacturerController : BaseController<Manufacturer>
+    public class ManufacturerController : OrderedController<Manufacturer>
     {
-        public ManufacturerController(IBaseService<Manufacturer> _service) : base(_service) { }
+        public ManufacturerController(IOrderedService<Manufacturer> _service) : base(_service) { }
 
         public ManufacturerController() : this(ManufacturerServiceFactory.Create()) { }
     }

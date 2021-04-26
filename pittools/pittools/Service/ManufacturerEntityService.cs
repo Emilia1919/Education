@@ -9,7 +9,7 @@ using pittools.Service.Abstract;
 
 namespace pittools.Service
 {
-    public class ManufacturerEntityService : BaseEntityService<Manufacturer>
+    public class ManufacturerEntityService : OrderedEntityService<Manufacturer>
     {
         Entities entities = new Entities();
         protected override System.Data.Entity.DbSet<Manufacturer> EntitySet { get { return entities.Manufacturers; } }

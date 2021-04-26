@@ -9,7 +9,7 @@ namespace pittools.Service.Factory
 {
     public static class ManufacturerServiceFactory
     {
-        public static IBaseService<Manufacturer> Create()
+        public static IOrderedService<Manufacturer> Create()
         {
             return new ManufacturerEntityService();
         }
