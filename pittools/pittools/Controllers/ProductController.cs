@@ -16,18 +16,21 @@ namespace pittools.Controllers
 
         public ProductController() : this(ProductServiceFactory.Create()) { }
 
+        // Включаем постраничный вывод
+        protected override bool IsPageable { get { return true; } }
+
         #region Overridden virtual methods
 
         // На страницу списка переходим через действие GetShortName без параметров
         protected override ActionResult ReturnToList(Product obj)
         {
-            return RedirectToAction("GetShortName", new { shortname = string.Empty });
+            return RedirectToAction("GetShortName", new { shortname = string.Empty, page = Request.QueryString["page"] });
         }
 
         // На страницу объекта переходим через действие GetShortName с текстовым параметром shortName
         protected override ActionResult ReturnToObject(Product obj)
         {
-            return RedirectToAction("GetShortName", new { shortname = obj.ShortName });
+            return RedirectToAction("GetShortName", new { shortname = obj.ShortName, page = Request.QueryString["page"] });
         }
 
         // Свойство ShortName будет автогенерироваться из свойства Name

@@ -23,3 +23,10 @@
         </tr>
     }
 </table>
+
+<br />
+<br />
+
+<div class="pager">
+    @Html.Partial("_Pager", (new pittools.Pager(Request.QueryString["page"], pittools.Service.Factory.ProductServiceFactory.Create().Get().Count(), Request.QueryString)).Links)
+</div>

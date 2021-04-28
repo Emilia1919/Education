@@ -17,7 +17,18 @@ namespace pittools.Controllers.Abstract
         {
             if (string.IsNullOrWhiteSpace(shortName))
             {
-                IEnumerable<T> objs = service.Get();
+                IEnumerable<T> objs = null;
+
+                if (IsPageable)
+                {
+                    int page = 1;
+                    if (Request.QueryString["page"] != null) page = int.Parse(Request.QueryString["page"]);
+                    if (page < 1) page = 1;
+
+                    objs = service.Get((page - 1) * Constants.PAGER_LINKS_PER_PAGE, Constants.PAGER_LINKS_PER_PAGE);
+                }
+                else objs = service.Get();
+
                 return View("Index", objs);
             }
             else

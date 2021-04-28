@@ -18,8 +18,21 @@
 
 <h2>Товары</h2>
 <ul>
-    @foreach (var product in Model.Products.OrderByDescending(item => item.Sequence))
-    {
-        <li>@Html.ActionLink(product.Name, "GetProductInManufacturer", "Product", new { manufacturer = Model.ShortName, product = product.ShortName }, null)</li>
+    @{
+        int page = 1;
+        if (Request.QueryString["page"] != null) { page = int.Parse(Request.QueryString["page"]); }
+        if (page < 1) { page = 1; }
+
+        foreach (var product in Model.Products.OrderByDescending(item => item.Sequence).Skip((page - 1) * pittools.Constants.PAGER_LINKS_PER_PAGE).Take(pittools.Constants.PAGER_LINKS_PER_PAGE))
+        {
+            <li>@Html.ActionLink(product.Name, "GetProductInManufacturer", "Product", new { manufacturer = Model.ShortName, product = product.ShortName, page = Request.QueryString["page"] }, null)</li>
+        }
     }
 </ul>
+
+<br />
+<br />
+
+<div class="pager">
+    @Html.Partial("_Pager", (new pittools.Pager(Request.QueryString["page"], Model.Products.Count, Request.QueryString)).Links)
+</div>

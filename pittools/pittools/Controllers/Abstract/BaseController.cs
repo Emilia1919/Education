@@ -10,8 +10,12 @@ namespace pittools.Controllers.Abstract
 {
     public abstract class BaseController<T> : Controller where T : class, IBase, new()
     {
-        // Объект для работы с данными
+        // Объект для для работы с данными
         protected IBaseService<T> service;
+
+        // Свойство, определяющее, работает ли в списке объектов постраничный вывод
+        // Если постраничный вывод нужен, то в классе-потомке этому свойству устанавливается значение TRUE
+        protected virtual bool IsPageable { get { return false; } }
 
         // Параметризованный конструктор
         public BaseController(IBaseService<T> _service)
@@ -24,7 +28,18 @@ namespace pittools.Controllers.Abstract
         // Получение списка объектов
         public virtual ActionResult Index()
         {
-            IEnumerable<T> objs = service.Get();
+            IEnumerable<T> objs = null;
+
+            if (IsPageable)
+            {
+                int page = 1;
+                if (Request.QueryString["page"] != null) page = int.Parse(Request.QueryString["page"]);
+                if (page < 1) page = 1;
+
+                objs = service.Get((page - 1) * Constants.PAGER_LINKS_PER_PAGE, Constants.PAGER_LINKS_PER_PAGE);
+            }
+            else objs = service.Get();
+
             return View(objs);
         }
 
@@ -118,13 +133,13 @@ namespace pittools.Controllers.Abstract
         // Перенаправление к странице списка объектов
         protected virtual ActionResult ReturnToList(T obj)
         {
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { page = Request.QueryString["page"] });
         }
 
         // Перенаправление к странице объекта
         protected virtual ActionResult ReturnToObject(T obj)
         {
-            return RedirectToAction("Details", new { id = obj.ID });
+            return RedirectToAction("Details", new { id = obj.ID, page = Request.QueryString["page"] });
         }
 
         // Перенаправление после создания объекта
