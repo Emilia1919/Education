@@ -13,7 +13,8 @@ namespace pittools.Models
     public partial class Manufacturer : IUrlFriendly
     {
         public bool CanBeDeleted()
-        {  
+        {
+            if (Products.Count > 0) return false;
             return true;
         }
         //public int? Sequence { get; set; } 

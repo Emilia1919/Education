@@ -12,21 +12,16 @@ namespace pittools.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Manufacturer
+    public partial class Product
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Manufacturer()
-        {
-            this.Products = new HashSet<Product>();
-        }
-    
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public Nullable<int> Sequence { get; set; }
         public string ShortName { get; set; }
+        public Nullable<int> Sequence { get; set; }
+        public string Description { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<int> ManufacturerID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
     }
 }

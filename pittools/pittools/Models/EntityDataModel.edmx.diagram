@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="d89ff86ef917480f99773589f0c43f08" Name="Diagram1">
         <EntityTypeShape EntityType="pittoolsModel.Manufacturer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="pittoolsModel.Product" Width="1.5" PointX="3.25" PointY="0.625" />
+        <AssociationConnector Association="pittoolsModel.FK_Product_Manufacturer" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

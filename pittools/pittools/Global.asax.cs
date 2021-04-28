@@ -25,6 +25,18 @@ namespace pittools
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
+            
+            routes.MapRoute(
+                "Products",
+                "products/{shortname}",
+                new { controller = "Product", action = "GetShortName", shortname = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
+                "ProductInManufacturer",
+                "manufacturers/{manufacturer}/{product}",
+                new { controller = "Product", action = "GetProductInManufacturer" }
+                );
         }
             protected void Application_Start()
         {
