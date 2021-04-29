@@ -52,6 +52,7 @@ namespace pittools.Controllers.Abstract
         }
 
         // Открытие формы создания объекта
+        [Authorize(Roles = Constants.ROLES_ADMIN_CONTENT_MANAGER)]
         public virtual ActionResult Create()
         {
             return View();
@@ -77,6 +78,7 @@ namespace pittools.Controllers.Abstract
         }
 
         // Открытие формы редактирование объекта
+        [Authorize(Roles = Constants.ROLES_ADMIN_CONTENT_MANAGER)]
         public virtual ActionResult Edit(int id)
         {
             T obj = service.Get(id);
@@ -102,6 +104,7 @@ namespace pittools.Controllers.Abstract
         }
 
         // Открытие страницы с подтверждением удаления объекта
+        [Authorize(Roles = Constants.ROLES_ADMIN_CONTENT_MANAGER)]
         public virtual ActionResult Delete(int id)
         {
             T obj = service.Get(id);

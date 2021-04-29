@@ -12,27 +12,30 @@
     @Model.Name
 </p>
 
-<p>@Html.ActionLink("Редактировать", "Edit", new { id = Model.ID })&nbsp;&nbsp;&nbsp;@Html.ActionLink("Удалить", "Delete", new { id = Model.ID })</p>
-<h2>@Model.Name</h2>
-<p>@Model.Description</p>
+@if (Request.IsAuthenticated && (User.IsInRole(pittools.Constants.ROLE_ADMIN) || User.IsInRole(pittools.Constants.ROLE_CONTENT_MANAGER)))
+{
+    <p>@Html.ActionLink("Редактировать", "Edit", new { id = Model.ID })&nbsp;&nbsp;&nbsp;@Html.ActionLink("Удалить", "Delete", new { id = Model.ID })</p>
+}
+    <h2>@Model.Name</h2>
+    <p>@Model.Description</p>
 
-<h2>Товары</h2>
-<ul>
-    @{
-        int page = 1;
-        if (Request.QueryString["page"] != null) { page = int.Parse(Request.QueryString["page"]); }
-        if (page < 1) { page = 1; }
+    <h2>Товары</h2>
+    <ul>
+        @{
+            int page = 1;
+            if (Request.QueryString["page"] != null) { page = int.Parse(Request.QueryString["page"]); }
+            if (page < 1) { page = 1; }
 
-        foreach (var product in Model.Products.OrderByDescending(item => item.Sequence).Skip((page - 1) * pittools.Constants.PAGER_LINKS_PER_PAGE).Take(pittools.Constants.PAGER_LINKS_PER_PAGE))
-        {
-            <li>@Html.ActionLink(product.Name, "GetProductInManufacturer", "Product", new { manufacturer = Model.ShortName, product = product.ShortName, page = Request.QueryString["page"] }, null)</li>
+            foreach (var product in Model.Products.OrderByDescending(item => item.Sequence).Skip((page - 1) * pittools.Constants.PAGER_LINKS_PER_PAGE).Take(pittools.Constants.PAGER_LINKS_PER_PAGE))
+            {
+                <li>@Html.ActionLink(product.Name, "GetProductInManufacturer", "Product", new { manufacturer = Model.ShortName, product = product.ShortName, page = Request.QueryString["page"] }, null)</li>
+            }
         }
-    }
-</ul>
+    </ul>
 
-<br />
-<br />
+    <br />
+    <br />
 
-<div class="pager">
-    @Html.Partial("_Pager", (new pittools.Pager(Request.QueryString["page"], Model.Products.Count, Request.QueryString)).Links)
-</div>
+    <div class="pager">
+        @Html.Partial("_Pager", (new pittools.Pager(Request.QueryString["page"], Model.Products.Count, Request.QueryString)).Links)
+    </div>

@@ -11,15 +11,21 @@
 </p>
 
 <h2>Производители</h2>
-<p>@Html.ActionLink("Создать", "Create")</p>
+@if (Request.IsAuthenticated && (User.IsInRole(pittools.Constants.ROLE_ADMIN) || User.IsInRole(pittools.Constants.ROLE_CONTENT_MANAGER)))
+{
+    <p>@Html.ActionLink("Создать", "Create")</p>
+}
 
 <table>
 @foreach (var item in Model)
 {
     <tr>
         <td>@Html.ActionLink(item.Name, "GetShortName", new { shortName = item.ShortName })</td>
-        <td style="padding-left:30px;">@Html.ActionLink("Вверх", "Up", new { id = item.ID })</td>
-        <td style="padding-left:30px;">@Html.ActionLink("Вниз", "Down", new { id = item.ID })</td>
-    </tr>
+        @if (Request.IsAuthenticated && (User.IsInRole(pittools.Constants.ROLE_ADMIN) || User.IsInRole(pittools.Constants.ROLE_CONTENT_MANAGER)))
+        {
+            <td style="padding-left:30px;">@Html.ActionLink("Вверх", "Up", new { id = item.ID })</td>
+            <td style="padding-left:30px;">@Html.ActionLink("Вниз", "Down", new { id = item.ID })</td>
+        }
+        </tr>
 }
 </table>
