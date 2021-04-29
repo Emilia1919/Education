@@ -37,6 +37,17 @@ namespace pittools
                 );
 
             routes.MapRoute(
+               "Categories",
+               "catalog/{shortname}",
+               new { controller = "Category", action = "GetShortName", shortname = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+               "Collections",
+               "catalog/{category}/{collection}",
+               new { controller = "Collection", action = "GetCollectionInCategory" }
+            );
+
+            routes.MapRoute(
                 "ProductInManufacturer",
                 "manufacturers/{manufacturer}/{product}",
                 new { controller = "Product", action = "GetProductInManufacturer" }

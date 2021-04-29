@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<pittools.Models.Category>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -28,4 +29,65 @@
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
+    @if (Request.IsAuthenticated && (User.IsInRole(pittools.Constants.ROLE_ADMIN) || User.IsInRole(pittools.Constants.ROLE_CONTENT_MANAGER)))
+    {
+        <p>
+            @Html.ActionLink("Создать категорию", "Create", "Category")
+            &nbsp; &nbsp; &nbsp;
+            @Html.ActionLink("Создать коллекцию", "Create", "Collection")
+        </p>
+    }
+
+
+    @functions
+{
+        public string Row(ref int index)
+        {
+            string strResult = "<tr>";
+
+            for (int innerIndex = 0; innerIndex < pittools.Constants.CATEGORY_NUMBER_PER_ROW; innerIndex++)
+            {
+                strResult += "<td st yle='text-align:center; padding-bottom:20px;'>";
+
+                if (index < Model.Count())
+                {
+                    var obj = Model.Skip(index).Take(1).First();
+                    string strImage = "0.jpg";
+                    if (!string.IsNullOrWhiteSpace(obj.ImageExt)) { strImage = obj.ID.ToString() + obj.ImageExt.TrimEnd() + "?" + DateTime.Now.ToString(); }
+                    strResult += string.Format("<a href='{0}'><img src='{1}/{2}/{3}' alt='{4}' /></a>", Url.Action("GetShortName", "Category", new { shortname = obj.ShortName }), Url.Content("~/Content"), pittools.Constants.CATEGORY_MINI_IMAGES_FOLDER, strImage, obj.Name);
+                    strResult += "<br />";
+
+                    strResult += Html.ActionLink(obj.Name, "GetShortName", "Category", new { shortname = obj.ShortName }, null);
+
+                    if (Request.IsAuthenticated && (User.IsInRole(pittools.Constants.ROLE_ADMIN) || User.IsInRole(pittools.Constants.ROLE_CONTENT_MANAGER)))
+                    {
+                        strResult += "<br />";
+                        strResult += Html.ActionLink("<- Вверх", "Up", "Category", new { id = obj.ID }, null);
+                        strResult += "&nbsp;&nbsp;&nbsp;";
+                        strResult += Html.ActionLink("Вниз ->", "Down", "Category", new { id = obj.ID }, null);
+                    }
+                }
+
+                strResult += "</td>";
+
+                index = index + 1;
+            }
+
+            strResult += "</tr>";
+
+            return strResult;
+        }
+    }
+
+    <table style="width:100%">
+        @{
+            int iCount = Model.Count();
+            int i = 0;
+
+            while (i < iCount)
+            {
+                @MvcHtmlString.Create(Row(ref i))
+            }
+        }
+    </table>
 </div>

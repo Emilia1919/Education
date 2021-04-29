@@ -18,6 +18,16 @@ namespace pittools
         public const string ROLE_CONTENT_MANAGER = "contentmanager";
         public const string ROLES_ADMIN_CONTENT_MANAGER = "admin,contentmanager";
 
+        public const string CATEGORY_MINI_IMAGES_FOLDER = "CategoryMiniImages";
+        public const int CATEGORY_NUMBER_PER_ROW = 3;
+        public const int CATEGORY_MINI_IMAGE_HEIGHT = 168;
+        public const int CATEGORY_MINI_IMAGE_WIDTH = 238;
+
+        public const string COLLECTION_MINI_IMAGES_FOLDER = "CollectionMiniImages";
+        public const int COLLECTION_NUMBER_PER_ROW = 3;
+        public const int COLLECTION_MINI_IMAGE_HEIGHT = 168;
+        public const int COLLECTION_MINI_IMAGE_WIDTH = 238;
+
         public static readonly List<string> RESERVED_WORDS = new List<string>()
         {
             "home","account","index","details","create","edit","delete","up","down",

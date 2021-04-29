@@ -1,4 +1,7 @@
-﻿using System;
+﻿using pittools.Models;
+using pittools.Service.Factory;
+using pittools.Service.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +13,10 @@ namespace pittools.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            IUrlFriendlyService<Category> service = CategoryServiceFactory.Create();
+            IEnumerable<Category> categories = service.Get();
+
+            return View(categories);
         }
 
         public ActionResult About()

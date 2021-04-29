@@ -1,0 +1,54 @@
+﻿@model pittools.Models.Collection
+
+@{
+    ViewBag.Title = string.Format("{0} | {1}", Model.Name, pittools.Constants.TITLE);
+}
+
+<p>
+    @Html.ActionLink("На главную", "Index", "Home")
+    @pittools.Constants.BREADCRUMBS_SEPARATOR
+    @Html.ActionLink(Model.Category.Name, "GetShortName", "Category", new { shortname = Model.Category.ShortName }, null)
+    @pittools.Constants.BREADCRUMBS_SEPARATOR
+    @Model.Name
+</p>
+
+<h2>@Model.Name</h2>
+
+@if (Request.IsAuthenticated && (User.IsInRole(pittools.Constants.ROLE_ADMIN) || User.IsInRole(pittools.Constants.ROLE_CONTENT_MANAGER)))
+{
+    <p>
+        @Html.ActionLink("Редактировать", "Edit", new { id = Model.ID })
+        &nbsp;&nbsp;&nbsp;
+        @Html.ActionLink("Удалить", "Delete", new { id = Model.ID })
+    </p>
+}
+
+<p>@Model.Description</p>
+
+@if (Request.IsAuthenticated && (User.IsInRole(pittools.Constants.ROLE_ADMIN) || User.IsInRole(pittools.Constants.ROLE_CONTENT_MANAGER)))
+{
+    <h2>Мини-изображения для списка</h2>
+
+    using (Html.BeginForm("UploadCatalogImage", "Collection", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.Hidden("objID", Model.ID)
+
+        <table>
+            <tr>
+                <td>
+                    @{
+                        string filename = string.Empty;
+                        if (string.IsNullOrWhiteSpace(Model.ImageExt)) { filename = "0.jpg"; }
+                        else { filename = string.Format("{0}{1}?{2}", Model.ID, Model.ImageExt.TrimEnd(), DateTime.Now); }
+                    }
+                    <img src='@(Url.Content("~/Content"))/@(pittools.Constants.COLLECTION_MINI_IMAGES_FOLDER)/@(filename)' alt='@Model.Name' />
+                </td>
+                <td style="padding-left:20px">
+                    <input type="file" name="imagefile" />
+                    <br />
+                    <input type="submit" value="Загрузить" />
+                </td>
+            </tr>
+        </table>
+    }
+}

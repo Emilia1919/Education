@@ -1,0 +1,8 @@
+﻿@model pittools.Models.Collection
+
+@{
+    ViewBag.Title = "Удаление невозможно";
+}
+
+<p>@Html.ActionLink("К списку", "GetShortName", "Category", new { shortname = Model.Category.ShortName }, null)</p>
+<h2>Удаление невозможно</h2>

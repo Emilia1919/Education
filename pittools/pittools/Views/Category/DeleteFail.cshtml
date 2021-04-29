@@ -1,0 +1,20 @@
+﻿@model pittools.Models.Category
+
+@{
+    ViewBag.Title = "Удаление невозможно";
+}
+
+<p>@Html.ActionLink("К списку", "Index", "Home")</p>
+<h2>Удаление невозможно</h2>
+
+<p style="color:Red">Сначала удалите коллекции в этой категории:</p>
+
+@if (Model.Collections.Count > 0)
+{
+<ul>
+    @foreach (var item in Model.Collections)
+    {
+        <li>@Html.ActionLink(item.Name, "GetShortName", "Collection", new { shortname = item.ShortName }, null)</li>
+    }
+</ul>
+}

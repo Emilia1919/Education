@@ -4,10 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d89ff86ef917480f99773589f0c43f08" Name="Diagram1">
-        <EntityTypeShape EntityType="pittoolsModel.Manufacturer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="pittoolsModel.Product" Width="1.5" PointX="3.25" PointY="0.625" />
-        <AssociationConnector Association="pittoolsModel.FK_Product_Manufacturer" />
+      <Diagram DiagramId="d3668313d25b4b7e9250742a375c43df" Name="Diagram1">
+        <EntityTypeShape EntityType="pittoolsModel.Manufacturer" Width="1.5" PointX="3.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="pittoolsModel.Product" Width="1.5" PointX="1.125" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="pittoolsModel.FK_Product_Manufacturer" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="pittoolsModel.Category" Width="1.5" PointX="1.125" PointY="3.25" />
+        <EntityTypeShape EntityType="pittoolsModel.Collection" Width="1.5" PointX="3.625" PointY="2.75" />
+        <AssociationConnector Association="pittoolsModel.FK_Collection_Category" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
