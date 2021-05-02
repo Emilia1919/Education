@@ -26,7 +26,7 @@ namespace pittools.Controllers
 
         protected override ActionResult ReturnToObject(Collection obj)
         {
-            return RedirectToAction("GetCollectionInCategory", "Collection", new { category = obj.Category.ShortName, collection = obj.ShortName });
+            return RedirectToAction("GetCollectionInCategory", "Collection", new {  collection = obj.ShortName });
         }
 
         protected override string GetShortNameSource(FormCollection collection)
@@ -94,6 +94,23 @@ namespace pittools.Controllers
             Collection obj = (service as IUrlFriendlyService<Collection>).Get(collection);
             if (obj == null) return View("NotFound");
             return View("Details", obj);
+        }
+        public ActionResult CollectionImagePreview(int CollectionID, int start)
+        {
+            Collection collection = service.Get(CollectionID);
+            ViewBag.LeftArrow = start - 1;
+            if ((start + Constants.COLLECTION_IMAGE_PREVIEW_COUNT) < collection.CollectionImages.Count) ViewBag.RightArrow = start + 1;
+            else ViewBag.RightArrow = -1;
+            ViewBag.CollectionID = CollectionID;
+
+            var images = collection.CollectionImages.OrderByDescending(item => item.Sequence).Skip(start).Take(Constants.COLLECTION_IMAGE_PREVIEW_COUNT);
+            return PartialView("_CollectionImagePreview", images);
+        }
+
+        public ActionResult CollectionImage(int CollectionImageID)
+        {
+            CollectionImage obj = pittools.Service.Factory.CollectionImageServiceFactory.Create().Get(CollectionImageID);
+            return PartialView("_CollectionImage", obj);
         }
     }
 }

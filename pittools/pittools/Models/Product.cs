@@ -14,6 +14,13 @@ namespace pittools.Models
     
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.CategoryProducts = new HashSet<CategoryProduct>();
+            this.CollectionProducts = new HashSet<CollectionProduct>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
@@ -21,7 +28,12 @@ namespace pittools.Models
         public string Description { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<int> ManufacturerID { get; set; }
+        public string ImageExt { get; set; }
     
         public virtual Manufacturer Manufacturer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoryProduct> CategoryProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CollectionProduct> CollectionProducts { get; set; }
     }
 }

@@ -15,6 +15,15 @@
           <Property Name="Sequence" Type="int" />
           <Property Name="ImageExt" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="CategoryProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Sequence" Type="int" />
+        </EntityType>
         <EntityType Name="Collection">
           <Key>
             <PropertyRef Name="ID" />
@@ -26,6 +35,24 @@
           <Property Name="Description" Type="text" />
           <Property Name="Sequence" Type="int" />
           <Property Name="ImageExt" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="CollectionImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CollectionID" Type="int" />
+          <Property Name="Sequence" Type="int" />
+          <Property Name="ImageExt" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="CollectionProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CollectionID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Sequence" Type="int" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -48,7 +75,32 @@
           <Property Name="Description" Type="text" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ManufacturerID" Type="int" />
+          <Property Name="ImageExt" Type="nchar" MaxLength="10" />
         </EntityType>
+        <Association Name="FK_CategoryProduct_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="CategoryProduct" Type="Self.CategoryProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CategoryProduct">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="CategoryProduct" Type="Self.CategoryProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CategoryProduct">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Collection_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
@@ -58,6 +110,42 @@
             </Principal>
             <Dependent Role="Collection">
               <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionImage_Collection">
+          <End Role="Collection" Type="Self.Collection" Multiplicity="0..1" />
+          <End Role="CollectionImage" Type="Self.CollectionImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collection">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CollectionImage">
+              <PropertyRef Name="CollectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionProduct_Collection">
+          <End Role="Collection" Type="Self.Collection" Multiplicity="0..1" />
+          <End Role="CollectionProduct" Type="Self.CollectionProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collection">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CollectionProduct">
+              <PropertyRef Name="CollectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="CollectionProduct" Type="Self.CollectionProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CollectionProduct">
+              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -75,12 +163,35 @@
         </Association>
         <EntityContainer Name="pittoolsModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryProduct" EntityType="Self.CategoryProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CollectionImage" EntityType="Self.CollectionImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CollectionProduct" EntityType="Self.CollectionProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CategoryProduct_Category" Association="Self.FK_CategoryProduct_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryProduct" EntitySet="CategoryProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryProduct_Product" Association="Self.FK_CategoryProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CategoryProduct" EntitySet="CategoryProduct" />
+          </AssociationSet>
           <AssociationSet Name="FK_Collection_Category" Association="Self.FK_Collection_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionImage_Collection" Association="Self.FK_CollectionImage_Collection">
+            <End Role="Collection" EntitySet="Collection" />
+            <End Role="CollectionImage" EntitySet="CollectionImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionProduct_Collection" Association="Self.FK_CollectionProduct_Collection">
+            <End Role="Collection" EntitySet="Collection" />
+            <End Role="CollectionProduct" EntitySet="CollectionProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionProduct_Product" Association="Self.FK_CollectionProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CollectionProduct" EntitySet="CollectionProduct" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Manufacturer" Association="Self.FK_Product_Manufacturer">
             <End Role="Manufacturer" EntitySet="Manufacturer" />
@@ -114,6 +225,9 @@
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ManufacturerID" Type="Int32" />
           <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
+          <Property Name="ImageExt" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CategoryProducts" Relationship="pittoolsModel.FK_CategoryProduct_Product" FromRole="Product" ToRole="CategoryProduct" />
+          <NavigationProperty Name="CollectionProducts" Relationship="pittoolsModel.FK_CollectionProduct_Product" FromRole="Product" ToRole="CollectionProduct" />
         </EntityType>
         <Association Name="FK_Product_Manufacturer">
           <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
@@ -140,6 +254,29 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Collection" EntitySet="Collections" />
           </AssociationSet>
+          <EntitySet Name="CollectionImages" EntityType="pittoolsModel.CollectionImage" />
+          <AssociationSet Name="FK_CollectionImage_Collection" Association="pittoolsModel.FK_CollectionImage_Collection">
+            <End Role="Collection" EntitySet="Collections" />
+            <End Role="CollectionImage" EntitySet="CollectionImages" />
+          </AssociationSet>
+          <EntitySet Name="CategoryProducts" EntityType="pittoolsModel.CategoryProduct" />
+          <AssociationSet Name="FK_CategoryProduct_Category" Association="pittoolsModel.FK_CategoryProduct_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CategoryProduct" EntitySet="CategoryProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryProduct_Product" Association="pittoolsModel.FK_CategoryProduct_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="CategoryProduct" EntitySet="CategoryProducts" />
+          </AssociationSet>
+          <EntitySet Name="CollectionProducts" EntityType="pittoolsModel.CollectionProduct" />
+          <AssociationSet Name="FK_CollectionProduct_Collection" Association="pittoolsModel.FK_CollectionProduct_Collection">
+            <End Role="Collection" EntitySet="Collections" />
+            <End Role="CollectionProduct" EntitySet="CollectionProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionProduct_Product" Association="pittoolsModel.FK_CollectionProduct_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="CollectionProduct" EntitySet="CollectionProducts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -151,6 +288,7 @@
           <Property Name="Sequence" Type="Int32" />
           <Property Name="ImageExt" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Collections" Relationship="pittoolsModel.FK_Collection_Category" FromRole="Category" ToRole="Collection" />
+          <NavigationProperty Name="CategoryProducts" Relationship="pittoolsModel.FK_CategoryProduct_Category" FromRole="Category" ToRole="CategoryProduct" />
         </EntityType>
         <EntityType Name="Collection">
           <Key>
@@ -164,6 +302,8 @@
           <Property Name="Sequence" Type="Int32" />
           <Property Name="ImageExt" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Category" Relationship="pittoolsModel.FK_Collection_Category" FromRole="Collection" ToRole="Category" />
+          <NavigationProperty Name="CollectionImages" Relationship="pittoolsModel.FK_CollectionImage_Collection" FromRole="Collection" ToRole="CollectionImage" />
+          <NavigationProperty Name="CollectionProducts" Relationship="pittoolsModel.FK_CollectionProduct_Collection" FromRole="Collection" ToRole="CollectionProduct" />
         </EntityType>
         <Association Name="FK_Collection_Category">
           <End Type="pittoolsModel.Category" Role="Category" Multiplicity="0..1" />
@@ -174,6 +314,98 @@
             </Principal>
             <Dependent Role="Collection">
               <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CollectionImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CollectionID" Type="Int32" />
+          <Property Name="Sequence" Type="Int32" />
+          <Property Name="ImageExt" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Collection" Relationship="pittoolsModel.FK_CollectionImage_Collection" FromRole="CollectionImage" ToRole="Collection" />
+        </EntityType>
+        <Association Name="FK_CollectionImage_Collection">
+          <End Type="pittoolsModel.Collection" Role="Collection" Multiplicity="0..1" />
+          <End Type="pittoolsModel.CollectionImage" Role="CollectionImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collection">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CollectionImage">
+              <PropertyRef Name="CollectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CategoryProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Sequence" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="pittoolsModel.FK_CategoryProduct_Category" FromRole="CategoryProduct" ToRole="Category" />
+          <NavigationProperty Name="Product" Relationship="pittoolsModel.FK_CategoryProduct_Product" FromRole="CategoryProduct" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_CategoryProduct_Category">
+          <End Type="pittoolsModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="pittoolsModel.CategoryProduct" Role="CategoryProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CategoryProduct">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryProduct_Product">
+          <End Type="pittoolsModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="pittoolsModel.CategoryProduct" Role="CategoryProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CategoryProduct">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CollectionProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CollectionID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Sequence" Type="Int32" />
+          <NavigationProperty Name="Collection" Relationship="pittoolsModel.FK_CollectionProduct_Collection" FromRole="CollectionProduct" ToRole="Collection" />
+          <NavigationProperty Name="Product" Relationship="pittoolsModel.FK_CollectionProduct_Product" FromRole="CollectionProduct" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_CollectionProduct_Collection">
+          <End Type="pittoolsModel.Collection" Role="Collection" Multiplicity="0..1" />
+          <End Type="pittoolsModel.CollectionProduct" Role="CollectionProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collection">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CollectionProduct">
+              <PropertyRef Name="CollectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionProduct_Product">
+          <End Type="pittoolsModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="pittoolsModel.CollectionProduct" Role="CollectionProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CollectionProduct">
+              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -197,6 +429,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="pittoolsModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ImageExt" ColumnName="ImageExt" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ShortName" ColumnName="ShortName" />
@@ -227,6 +460,36 @@
                 <ScalarProperty Name="ShortName" ColumnName="ShortName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CollectionImages">
+            <EntityTypeMapping TypeName="pittoolsModel.CollectionImage">
+              <MappingFragment StoreEntitySet="CollectionImage">
+                <ScalarProperty Name="ImageExt" ColumnName="ImageExt" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryProducts">
+            <EntityTypeMapping TypeName="pittoolsModel.CategoryProduct">
+              <MappingFragment StoreEntitySet="CategoryProduct">
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CollectionProducts">
+            <EntityTypeMapping TypeName="pittoolsModel.CollectionProduct">
+              <MappingFragment StoreEntitySet="CollectionProduct">
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -29,5 +29,8 @@ namespace pittools.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Collection> Collections { get; set; }
+        public virtual DbSet<CollectionImage> CollectionImages { get; set; }
+        public virtual DbSet<CategoryProduct> CategoryProducts { get; set; }
+        public virtual DbSet<CollectionProduct> CollectionProducts { get; set; }
     }
 }

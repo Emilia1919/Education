@@ -175,7 +175,10 @@
     <Compile Include="Controllers\Abstract\UrlFriendlyController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CategoryProductController.cs" />
     <Compile Include="Controllers\CollectionController.cs" />
+    <Compile Include="Controllers\CollectionImageController.cs" />
+    <Compile Include="Controllers\CollectionProductController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />
@@ -189,10 +192,22 @@
       <DependentUpon>EntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryPartial.cs" />
+    <Compile Include="Models\CategoryProduct.cs">
+      <DependentUpon>EntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CategoryProductPartial.cs" />
     <Compile Include="Models\Collection.cs">
       <DependentUpon>EntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CollectionImage.cs">
+      <DependentUpon>EntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CollectionImagePartial.cs" />
     <Compile Include="Models\CollectionPartial.cs" />
+    <Compile Include="Models\CollectionProduct.cs">
+      <DependentUpon>EntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CollectionProductPartial.cs" />
     <Compile Include="Models\EntityDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -232,8 +247,14 @@
     <Compile Include="Service\Abstract\OrderedEntityService.cs" />
     <Compile Include="Service\Abstract\UrlFriendlyEntityService.cs" />
     <Compile Include="Service\CategoryEntityService.cs" />
+    <Compile Include="Service\CategoryProductEntityService.cs" />
     <Compile Include="Service\CollectionEntityService.cs" />
+    <Compile Include="Service\CollectionImageEntityService.cs" />
+    <Compile Include="Service\CollectionProductEntityService.cs" />
+    <Compile Include="Service\Factory\CategoryProductServiceFactory.cs" />
     <Compile Include="Service\Factory\CategoryServiceFactory.cs" />
+    <Compile Include="Service\Factory\CollectionImageServiceFactory.cs" />
+    <Compile Include="Service\Factory\CollectionProductServiceFactory.cs" />
     <Compile Include="Service\Factory\CollectionServiceFactory.cs" />
     <Compile Include="Service\Factory\ManufacturerServiceFactory.cs" />
     <Compile Include="Service\Factory\ProductServiceFactory.cs" />
@@ -251,6 +272,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CategoryMiniImages\0.jpg" />
     <Content Include="Content\CollectionMiniImages\0.jpg" />
+    <Content Include="Content\ProductImages\Mini\0.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -281,6 +303,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -348,9 +372,16 @@
     <Content Include="Views\Collection\Delete.cshtml" />
     <Content Include="Views\Collection\DeleteFail.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
+    <Content Include="Views\Collection\_CollectionImage.cshtml" />
+    <Content Include="Views\Collection\_CollectionImagePreview.cshtml" />
+    <Content Include="Views\Shared\_CollectionsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\CollectionImages\Preview\" />
+    <Folder Include="Views\CategoryProduct\" />
+    <Folder Include="Views\CollectionImage\" />
+    <Folder Include="Views\CollectionProduct\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -18,6 +18,7 @@ namespace pittools.Models
         public Category()
         {
             this.Collections = new HashSet<Collection>();
+            this.CategoryProducts = new HashSet<CategoryProduct>();
         }
     
         public int ID { get; set; }
@@ -28,5 +29,7 @@ namespace pittools.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Collection> Collections { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoryProduct> CategoryProducts { get; set; }
     }
 }

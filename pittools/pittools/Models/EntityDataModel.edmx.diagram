@@ -8,9 +8,17 @@
         <EntityTypeShape EntityType="pittoolsModel.Manufacturer" Width="1.5" PointX="3.625" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="pittoolsModel.Product" Width="1.5" PointX="1.125" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="pittoolsModel.FK_Product_Manufacturer" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="pittoolsModel.Category" Width="1.5" PointX="1.125" PointY="3.25" />
+        <EntityTypeShape EntityType="pittoolsModel.Category" Width="1.5" PointX="1.125" PointY="3.875" />
         <EntityTypeShape EntityType="pittoolsModel.Collection" Width="1.5" PointX="3.625" PointY="2.75" />
         <AssociationConnector Association="pittoolsModel.FK_Collection_Category" />
+        <EntityTypeShape EntityType="pittoolsModel.CollectionImage" Width="1.5" PointX="5.875" PointY="3.125" />
+        <AssociationConnector Association="pittoolsModel.FK_CollectionImage_Collection" />
+        <EntityTypeShape EntityType="pittoolsModel.CategoryProduct" Width="1.5" PointX="6.375" PointY="0.75" />
+        <AssociationConnector Association="pittoolsModel.FK_CategoryProduct_Category" />
+        <AssociationConnector Association="pittoolsModel.FK_CategoryProduct_Product" />
+        <EntityTypeShape EntityType="pittoolsModel.CollectionProduct" Width="1.5" PointX="9.125" PointY="1.5" />
+        <AssociationConnector Association="pittoolsModel.FK_CollectionProduct_Collection" />
+        <AssociationConnector Association="pittoolsModel.FK_CollectionProduct_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

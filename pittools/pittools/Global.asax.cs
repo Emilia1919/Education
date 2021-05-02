@@ -46,7 +46,16 @@ namespace pittools
                "catalog/{category}/{collection}",
                new { controller = "Collection", action = "GetCollectionInCategory" }
             );
-
+            routes.MapRoute(
+               "ProductInCategory",
+               "catalog/{category}/products/{product}",
+               new { controller = "Product", action = "GetProductInCategory" }
+               );
+            routes.MapRoute(
+                "ProductInCollection",
+                "catalog/{category}/{collection}/{product}",
+                new { controller = "Product", action = "GetProductInCollection" }
+                );
             routes.MapRoute(
                 "ProductInManufacturer",
                 "manufacturers/{manufacturer}/{product}",

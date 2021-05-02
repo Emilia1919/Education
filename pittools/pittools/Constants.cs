@@ -28,6 +28,30 @@ namespace pittools
         public const int COLLECTION_MINI_IMAGE_HEIGHT = 168;
         public const int COLLECTION_MINI_IMAGE_WIDTH = 238;
 
+        // Папки для загрузки картинок для фотогалереи раздела Коллекции
+        public const string COLLECTION_IMAGE_FOLDER = "CollectionImages";
+        public const string COLLECTION_IMAGE_PREVIEW_FOLDER = "Preview";
+
+        // Размеры уменьшенной и увеличенной картинки для фотогалереи раздела Коллекции
+        public const int COLLECTION_IMAGE_HEIGHT = 0;
+        public const int COLLECTION_IMAGE_WIDTH = 750;
+        public const int COLLECTION_IMAGE_PREVIEW_HEIGHT = 100;
+        public const int COLLECTION_IMAGE_PREVIEW_WIDTH = 0;
+        public const int COLLECTION_IMAGE_PREVIEW_COUNT = 5;
+
+        // Папки для загрузки картинок для раздела Товары
+        public const string PRODUCT_IMAGES_FOLDER = "ProductImages";
+        public const string PRODUCT_IMAGES_MINI_FOLDER = "Mini";
+
+        // Размеры картинок для раздела Товары
+        public const int PRODUCT_IMAGE_HEIGHT = 0;
+        public const int PRODUCT_IMAGE_WIDTH = 750;
+        public const int PRODUCT_IMAGE_MINI_HEIGHT = 168;
+        public const int PRODUCT_IMAGE_MINI_WIDTH = 238;
+
+        // Количество мини-изображений товара в одной строке на странице списка
+        public const int PRODUCT_NUMBER_IN_ROW = 3;
+
         public static readonly List<string> RESERVED_WORDS = new List<string>()
         {
             "home","account","index","details","create","edit","delete","up","down",

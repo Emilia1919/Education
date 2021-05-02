@@ -129,6 +129,21 @@ namespace pittools.Controllers.Abstract
             return onDeleted;
         }
 
+        // Удаление объекта без перенаправления на страницу подтверждения
+        [Authorize(Roles = Constants.ROLES_ADMIN_CONTENT_MANAGER)]
+        public virtual ActionResult DeleteExpress(int id)
+        {
+            T obj = service.Get(id);
+            if (obj == null) return View("NotFound");
+
+            ActionResult onDeleted = OnDeleted(obj);
+
+            OnDelete(obj);
+            service.Delete(obj);
+            service.Save();
+            return onDeleted;
+        }
+
         #endregion
 
         #region Virtual methods
